@@ -29,7 +29,7 @@ class NoticeRepositoryTest {
     }
 
     @Test
-    void 모든_notice_조회() {
+    void notice_저장_조회() {
         //given
 //        LocalDateTime now = LocalDateTime.of(2019, 6, 4, 0, 0, 0);
         LocalDateTime now = LocalDateTime.now();
@@ -41,13 +41,13 @@ class NoticeRepositoryTest {
                 .build());
 
         //when
-        List<Notice> notices = noticeRepository.findAll();
+        List<Notice> noticeList = noticeRepository.findAll();
 
         //then
-        Notice notice = notices.get(0);
+        Notice notice = noticeList.get(0);
         assertThat(notice.getTitle()).isEqualTo(title);
         assertThat(notice.getContent()).isEqualTo(content);
-        System.out.println("notice.getCreated() = " + notice.getCreated());
-        assertThat(notice.getCreated()).isAfter(now);
+        System.out.println("notice.getCreatedDate() = " + notice.getCreatedDate());
+        assertThat(notice.getCreatedDate()).isAfter(now);
     }
 }
