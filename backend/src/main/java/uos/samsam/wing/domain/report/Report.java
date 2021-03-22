@@ -30,4 +30,9 @@ public class Report extends BaseTimeEntity {
         this.tag = tag;
         this.content = content;
     }
+
+    public void update(ReportTag tag, String content) {
+        this.tag = tag;
+        this.content = content;
+    }
 }
