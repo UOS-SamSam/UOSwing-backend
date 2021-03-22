@@ -1,14 +1,18 @@
 package uos.samsam.wing.web.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import uos.samsam.wing.domain.padbox.PadBox;
 
+@Getter
+@NoArgsConstructor
 public class PadBoxListResponseDto {
     private Long id;
     private Double latitude;    // 위도
     private Double longitude;   // 경도
     private String address;     // 주소
     private String name;        // 이름
-    private Integer padAmount;      // 남은 수량
+    private Integer padAmount;  // 남은 수량
     private Double temperature; // 온도
     private Double humidity;    // 습도
 
