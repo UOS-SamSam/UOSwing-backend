@@ -6,7 +6,6 @@ import uos.samsam.wing.domain.padbox.PadBox;
 @Getter
 public class PadBoxResponseDto {
     private Long id;
-    private Long boxId;
     private Double latitude;    // 위도
     private Double longitude;   // 경도
     private String address;     // 주소
@@ -17,7 +16,6 @@ public class PadBoxResponseDto {
 
     public PadBoxResponseDto(PadBox entity) {
         this.id = entity.getId();
-        this.boxId = entity.getBoxId();
         this.latitude = entity.getLatitude();
         this.longitude = entity.getLongitude();
         this.address = entity.getAddress();

@@ -7,15 +7,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class PadBoxUpdateRequestDto {
-    private Long boxId;
     private Double latitude;    // 위도
     private Double longitude;   // 경도
     private String address;     // 주소
     private String name;        // 이름
 
     @Builder
-    public PadBoxUpdateRequestDto(Long boxId, Double latitude, Double longitude, String address, String name) {
-        this.boxId = boxId;
+    public PadBoxUpdateRequestDto(Double latitude, Double longitude, String address, String name) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
