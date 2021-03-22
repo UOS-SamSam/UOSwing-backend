@@ -1,4 +1,4 @@
-package uos.samsam.wing.service;
+package uos.samsam.wing.service.padbox;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,15 +18,14 @@ public class PadBoxService {
 
     @Transactional
     public Long save(PadBoxSaveRequestDto requestDto) {
-        return padBoxRepository.save(requestDto.toEntity()).getBoxId();
+        return padBoxRepository.save(requestDto.toEntity()).getId();
     }
 
     @Transactional
     public Long update(Long id, PadBoxUpdateRequestDto requestDto) {
         PadBox padBox = padBoxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("[id:" + id + "]해당 보관함이 없습니다."));
-        padBox.update(requestDto.getBoxId(),
-                requestDto.getLatitude(),
+        padBox.update(requestDto.getLatitude(),
                 requestDto.getLongitude(),
                 requestDto.getAddress(),
                 requestDto.getName());

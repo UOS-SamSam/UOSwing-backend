@@ -27,7 +27,6 @@ class PadBoxRepositoryTest {
     @Test
     public void PadBox_저장_불러오기() {
         // given
-        Long boxId = 1L;
         Double latitude = 37.583458;
         Double longitude = 127.058305;
         String address = "서울특별시 동대문구 전농2동 89-14";
@@ -36,7 +35,6 @@ class PadBoxRepositoryTest {
         Double temperature = 21.0;
         Double humidity = 35.0;
         padBoxRepository.save(PadBox.builder()
-                .boxId(boxId)
                 .latitude(latitude)
                 .longitude(longitude)
                 .address(address)
@@ -51,7 +49,6 @@ class PadBoxRepositoryTest {
 
         // then
         PadBox padBox = padBoxList.get(0);
-        assertThat(padBox.getBoxId()).isEqualTo(boxId);
         assertThat(padBox.getLatitude()).isEqualTo(latitude);
         assertThat(padBox.getLongitude()).isEqualTo(longitude);
         assertThat(padBox.getAddress()).isEqualTo(address);

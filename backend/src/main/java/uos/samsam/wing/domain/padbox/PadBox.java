@@ -11,12 +11,9 @@ import javax.persistence.*;
 @Entity
 public class PadBox {
 
-    @Id
+    @Id @Column(name = "BOX_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "BOX_ID", nullable = false, unique = true)
-    private Long boxId;
 
     @Column(nullable = false)
     private Double latitude;    // 위도
@@ -38,8 +35,7 @@ public class PadBox {
     private Double humidity;    // 습도
 
     @Builder
-    public PadBox(Long boxId, Double latitude, Double longitude, String address, String name, int padAmount, Double temperature, Double humidity) {
-        this.boxId = boxId;
+    public PadBox(Double latitude, Double longitude, String address, String name, int padAmount, Double temperature, Double humidity) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
@@ -49,8 +45,7 @@ public class PadBox {
         this.humidity = humidity;
     }
 
-    public void update(Long boxId, Double latitude, Double longitude, String address, String name) {
-        this.boxId = boxId;
+    public void update(Double latitude, Double longitude, String address, String name) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;

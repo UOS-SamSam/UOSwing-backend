@@ -29,7 +29,6 @@ class PadBoxLogRepositoryTest {
     @Test
     public void 로그_생성_불러오기() {
         // given
-        Long boxId = 1L;
         Double latitude = 37.583458;
         Double longitude = 127.058305;
         String address = "서울특별시 동대문구 전농2동 89-14";
@@ -38,7 +37,6 @@ class PadBoxLogRepositoryTest {
         Double temperature = 21.0;
         Double humidity = 35.0;
         PadBox padBox = PadBox.builder()
-                .boxId(boxId)
                 .latitude(latitude)
                 .longitude(longitude)
                 .address(address)
@@ -64,7 +62,6 @@ class PadBoxLogRepositoryTest {
         PadBoxLog padBoxLog = padBoxLogList.get(0);
         assertThat(padBoxLog.getUsedAmount()).isEqualTo(usedAmount);
         assertThat(padBoxLog.getCreatedDate()).isAfter(now);
-        assertThat(padBox.getBoxId()).isEqualTo(padBoxLog.getPadBox().getBoxId());
         assertThat(padBox.getId()).isEqualTo(padBoxLog.getPadBox().getId());
         assertThat(padBox.getName()).isEqualTo(padBoxLog.getPadBox().getName());
     }

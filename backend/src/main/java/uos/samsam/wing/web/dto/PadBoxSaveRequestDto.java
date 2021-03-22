@@ -8,7 +8,6 @@ import uos.samsam.wing.domain.padbox.PadBox;
 @Getter
 @NoArgsConstructor
 public class PadBoxSaveRequestDto {
-    private Long boxId;
     private Double latitude;    // 위도
     private Double longitude;   // 경도
     private String address;     // 주소
@@ -18,8 +17,7 @@ public class PadBoxSaveRequestDto {
     private Double humidity;    // 습도
 
     @Builder
-    public PadBoxSaveRequestDto(Long boxId, Double latitude, Double longitude, String address, String name, int padAmount, Double temperature, Double humidity) {
-        this.boxId = boxId;
+    public PadBoxSaveRequestDto(Double latitude, Double longitude, String address, String name, int padAmount, Double temperature, Double humidity) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
@@ -31,7 +29,6 @@ public class PadBoxSaveRequestDto {
 
     public PadBox toEntity() {
         return PadBox.builder()
-                .boxId(boxId)
                 .latitude(latitude)
                 .longitude(longitude)
                 .address(address)
