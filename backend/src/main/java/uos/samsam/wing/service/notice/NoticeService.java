@@ -30,7 +30,7 @@ public class NoticeService {
         return new NoticeResponseDto(entity);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NoticeResponseDto> findAllDesc() {
         return noticeRepository.findAllDesc().stream()
                 .map(NoticeResponseDto::new)
