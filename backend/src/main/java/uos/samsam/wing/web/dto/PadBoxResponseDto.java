@@ -10,7 +10,7 @@ public class PadBoxResponseDto {
     private Double longitude;   // 경도
     private String address;     // 주소
     private String name;        // 이름
-    private int padAmount;      // 남은 수량
+    private Integer padAmount;      // 남은 수량
     private Double temperature; // 온도
     private Double humidity;    // 습도
 

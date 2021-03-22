@@ -28,7 +28,7 @@ public class PadBox {
     private String name;        // 이름
 
     @Column(nullable = false)
-    private int padAmount;      // 남은 수량
+    private Integer padAmount;      // 남은 수량
 
     private Double temperature; // 온도
 

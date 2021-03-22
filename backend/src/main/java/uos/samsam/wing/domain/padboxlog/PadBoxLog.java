@@ -22,7 +22,7 @@ public class PadBoxLog extends BaseTimeEntity {
     @JoinColumn(name = "BOX_ID")
     private PadBox padBox;          // 사용된 PadBox
 
-    private int usedAmount;         // 사용 갯수
+    private Integer usedAmount;         // 사용 갯수
 
     @Builder
     public PadBoxLog(PadBox padBox, int usedAmount) {

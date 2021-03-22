@@ -12,12 +12,12 @@ public class PadBoxSaveRequestDto {
     private Double longitude;   // 경도
     private String address;     // 주소
     private String name;        // 이름
-    private int padAmount;      // 남은 수량
+    private Integer padAmount;      // 남은 수량
     private Double temperature; // 온도
     private Double humidity;    // 습도
 
     @Builder
-    public PadBoxSaveRequestDto(Double latitude, Double longitude, String address, String name, int padAmount, Double temperature, Double humidity) {
+    public PadBoxSaveRequestDto(Double latitude, Double longitude, String address, String name, Integer padAmount, Double temperature, Double humidity) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;

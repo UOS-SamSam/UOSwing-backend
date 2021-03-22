@@ -31,7 +31,7 @@ class PadBoxRepositoryTest {
         Double longitude = 127.058305;
         String address = "서울특별시 동대문구 전농2동 89-14";
         String name = "21세기관";
-        int padAmount = 0;
+        Integer padAmount = 0;
         Double temperature = 21.0;
         Double humidity = 35.0;
         padBoxRepository.save(PadBox.builder()
