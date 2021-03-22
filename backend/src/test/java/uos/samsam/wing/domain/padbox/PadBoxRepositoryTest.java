@@ -1,6 +1,7 @@
 package uos.samsam.wing.domain.padbox;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class PadBoxRepositoryTest {
 
     @Autowired PadBoxRepository padBoxRepository;
+
+    @AfterEach
+    public void cleanup() {
+        padBoxRepository.deleteAll();
+    }
 
     @Test
     public void PadBox_저장_불러오기() {
