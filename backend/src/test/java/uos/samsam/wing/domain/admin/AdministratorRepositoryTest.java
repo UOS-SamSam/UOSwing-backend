@@ -1,4 +1,4 @@
-package uos.samsam.wing.domain.administrator;
+package uos.samsam.wing.domain.admin;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AdministratorRepositoryTest {
 
     @Autowired
-    AdministratorRepository administratorRepository;
+    AdminRepository administratorRepository;
 
     @AfterEach
     void cleanup() {
@@ -24,19 +24,33 @@ class AdministratorRepositoryTest {
     }
 
     @Test
-    void notice_저장_조회() {
+    void admin_저장_조회() {
         //given
         String key = "테스트 키";
-        administratorRepository.save(Administrator.builder()
+        administratorRepository.save(Admin.builder()
                 .key(key)
                 .build());
 
         //when
-        List<Administrator> administratorList = administratorRepository.findAll();
+        List<Admin> administratorList = administratorRepository.findAll();
 
         //then
-        Administrator administrator = administratorList.get(0);
+        Admin administrator = administratorList.get(0);
         assertThat(administrator.getKey()).isEqualTo(key);
     }
 
+    @Test
+    void admin_키로_찾기() {
+        //given
+        String key = "테스트 키";
+        administratorRepository.save(Admin.builder()
+            .key(key)
+            .build());
+
+        //when
+        Admin admin = administratorRepository.findByKey(key);
+
+        //then
+        assertThat(admin.getKey()).isEqualTo(key);
+    }
 }
