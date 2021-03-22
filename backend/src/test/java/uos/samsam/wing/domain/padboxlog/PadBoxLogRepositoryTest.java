@@ -1,31 +1,33 @@
-package uos.samsam.wing.domain.padbox;
+package uos.samsam.wing.domain.padboxlog;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import uos.samsam.wing.domain.padbox.PadBox;
+import uos.samsam.wing.domain.padbox.PadBoxRepository;
 
-import javax.persistence.Column;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class PadBoxRepositoryTest {
+class PadBoxLogRepositoryTest {
 
+    @Autowired PadBoxLogRepository padBoxLogRepository;
     @Autowired PadBoxRepository padBoxRepository;
 
     @AfterEach
     public void cleanup() {
+        padBoxLogRepository.deleteAll();
         padBoxRepository.deleteAll();
     }
 
     @Test
-    public void PadBox_저장_불러오기() {
+    public void 로그_생성_불러오기() {
         // given
         Long boxId = 1L;
         Double latitude = 37.583458;
@@ -35,7 +37,7 @@ class PadBoxRepositoryTest {
         int padAmount = 0;
         Double temperature = 21.0;
         Double humidity = 35.0;
-        padBoxRepository.save(PadBox.builder()
+        PadBox padBox = PadBox.builder()
                 .boxId(boxId)
                 .latitude(latitude)
                 .longitude(longitude)
@@ -44,20 +46,27 @@ class PadBoxRepositoryTest {
                 .padAmount(padAmount)
                 .temperature(temperature)
                 .humidity(humidity)
+                .build();
+        padBoxRepository.save(padBox);
+
+        LocalDateTime now = LocalDateTime.now();
+
+        int usedAmount = 3;
+        padBoxLogRepository.save(PadBoxLog.builder()
+                .padBox(padBox)
+                .usedAmount(usedAmount)
                 .build());
 
         // when
-        List<PadBox> padBoxList = padBoxRepository.findAll();
+        List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
 
         // then
-        PadBox padBox = padBoxList.get(0);
-        assertThat(padBox.getBoxId()).isEqualTo(boxId);
-        assertThat(padBox.getLatitude()).isEqualTo(latitude);
-        assertThat(padBox.getLongitude()).isEqualTo(longitude);
-        assertThat(padBox.getAddress()).isEqualTo(address);
-        assertThat(padBox.getName()).isEqualTo(name);
-        assertThat(padBox.getPadAmount()).isEqualTo(padAmount);
-        assertThat(padBox.getTemperature()).isEqualTo(temperature);
-        assertThat(padBox.getHumidity()).isEqualTo(humidity);
+        PadBoxLog padBoxLog = padBoxLogList.get(0);
+        assertThat(padBoxLog.getUsedAmount()).isEqualTo(usedAmount);
+        assertThat(padBoxLog.getCreatedDate()).isAfter(now);
+        assertThat(padBox.getBoxId()).isEqualTo(padBoxLog.getPadBox().getBoxId());
+        assertThat(padBox.getId()).isEqualTo(padBoxLog.getPadBox().getId());
+        assertThat(padBox.getName()).isEqualTo(padBoxLog.getPadBox().getName());
     }
+
 }
