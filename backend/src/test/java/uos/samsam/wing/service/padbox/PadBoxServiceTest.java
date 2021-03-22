@@ -132,9 +132,9 @@ class PadBoxServiceTest {
         Double nextTemperature = 23.0;
         Double nextHumidity = 34.0;
         PadBoxUpdateStateRequestDto updateRequestDto = PadBoxUpdateStateRequestDto.builder()
-                .padAmount(padAmount)
-                .temperature(temperature)
-                .humidity(humidity)
+                .padAmount(nextPadAmount)
+                .temperature(nextTemperature)
+                .humidity(nextHumidity)
                 .build();
 
         // when

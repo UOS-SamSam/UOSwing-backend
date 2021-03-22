@@ -19,14 +19,15 @@ public class PadBoxLogService {
 
     @Transactional
     public List<StatisticsResponseDto> statistics(int duration) {
+        LocalDateTime deleteLimit = LocalDateTime.now().minusDays(30);
         LocalDateTime begin = LocalDateTime.now().minusDays(duration);
         Map<String, Integer> counter = new TreeMap<String, Integer>(Collections.reverseOrder());
 
         List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
         for (PadBoxLog padBoxLog : padBoxLogList) {
-            if (padBoxLog.getCreatedDate().isBefore(begin)) {
+            if (padBoxLog.getCreatedDate().isBefore(deleteLimit)) {
                 padBoxLogRepository.delete(padBoxLog);
-            } else {
+            } else if (padBoxLog.getCreatedDate().isAfter(begin)) {
                 String padBoxName = padBoxLog.getPadBox().getName();
                 Integer beforeValue = counter.get(padBoxName);
                 counter.put(padBoxName, beforeValue == null ? 1 : beforeValue + 1);
