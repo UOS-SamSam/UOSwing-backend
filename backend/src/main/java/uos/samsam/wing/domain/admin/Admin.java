@@ -1,4 +1,4 @@
-package uos.samsam.wing.domain.administrator;
+package uos.samsam.wing.domain.admin;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,17 +9,17 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Administrator {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String key;
 
     @Builder
-    public Administrator(Long id, String key) {
+    public Admin(Long id, String key) {
         this.id = id;
         this.key = key;
     }
