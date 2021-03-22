@@ -47,7 +47,7 @@ class NoticeRepositoryTest {
         Notice notice = notices.get(0);
         assertThat(notice.getTitle()).isEqualTo(title);
         assertThat(notice.getContent()).isEqualTo(content);
-        System.out.println("notice.getCreated() = " + notice.getCreated());
-        assertThat(notice.getCreated()).isAfter(now);
+        System.out.println("notice.getCreated() = " + notice.getCreatedDate());
+        assertThat(notice.getCreatedDate()).isAfter(now);
     }
 }
