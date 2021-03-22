@@ -15,7 +15,7 @@ public class PadBox {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "BOX_ID", nullable = false, unique = true)
     private Long boxId;
 
     @Column(nullable = false)
