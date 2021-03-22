@@ -48,4 +48,18 @@ public class PadBox {
         this.temperature = temperature;
         this.humidity = humidity;
     }
+
+    public void update(Long boxId, Double latitude, Double longitude, String address, String name) {
+        this.boxId = boxId;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+        this.name = name;
+    }
+
+    public void updateState(int padAmount, Double temperature, Double humidity) {
+        this.padAmount = padAmount;
+        this.temperature = temperature;
+        this.humidity = humidity;
+    }
 }
