@@ -28,17 +28,17 @@ public class PadBoxApiController {
         return padBoxService.updateState(id, requestDto);
     }
 
-    @PostMapping("/api/v1/padbox/save")
+    @PostMapping("/api/v1/padbox")
     public Long save(@RequestBody PadBoxSaveRequestDto requestDto) {
         return padBoxService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/padbox/update/{id}")
+    @PutMapping("/api/v1/padbox/{id}")
     public Long update(@PathVariable Long id, @RequestBody PadBoxUpdateRequestDto requestDto) {
         return padBoxService.update(id, requestDto);
     }
 
-    @DeleteMapping("/api/v1/padbox/delete/{id}")
+    @DeleteMapping("/api/v1/padbox/{id}")
     public void delete(@PathVariable Long id) {
         padBoxService.delete(id);
     }
