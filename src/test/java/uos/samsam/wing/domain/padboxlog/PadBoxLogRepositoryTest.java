@@ -47,8 +47,8 @@ class PadBoxLogRepositoryTest {
                 .build();
         padBoxRepository.save(padBox);
 
-        LocalDateTime now = LocalDateTime.now();
-
+//        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2021, 3, 27, 0, 0, 0);
         Integer usedAmount = 3;
         padBoxLogRepository.save(PadBoxLog.builder()
                 .padBox(padBox)

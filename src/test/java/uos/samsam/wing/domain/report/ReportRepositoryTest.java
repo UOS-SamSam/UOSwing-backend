@@ -31,7 +31,8 @@ class ReportRepositoryTest {
     @Test
     void report_저장_조회() {
         //given
-        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2021, 3, 27, 0, 0, 0);
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
         reportRepository.save(Report.builder()
