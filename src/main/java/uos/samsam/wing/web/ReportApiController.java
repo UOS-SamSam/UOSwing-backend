@@ -9,28 +9,29 @@ import uos.samsam.wing.web.dto.ReportSaveRequestDto;
 import java.util.List;
 
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/report")
 @RestController
 public class ReportApiController {
 
     private final ReportService reportService;
 
-    @GetMapping("/api/v1/report")
+    @GetMapping("/")
     public List<ReportResponseDto> findAll() {
         return reportService.findAll();
     }
 
-    @GetMapping("/api/v1/report/{id}")
+    @GetMapping("/{id}")
     public ReportResponseDto findById(@PathVariable Long id) {
         return reportService.findById(id);
     }
 
-    @PostMapping("/api/v1/report")
+    @PostMapping("/")
     public Long save(@RequestBody ReportSaveRequestDto requestDto) {
         return reportService.save(requestDto);
     }
 
 
-    @DeleteMapping("/api/v1/report/{id}")
+    @DeleteMapping("/{id}")
     public Long delete(@PathVariable Long id) {
         reportService.delete(id);
         return id;

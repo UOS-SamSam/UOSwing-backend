@@ -10,32 +10,33 @@ import uos.samsam.wing.web.dto.NoticeUpdateRequestDto;
 import java.util.List;
 
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/notice")
 @RestController
 public class NoticeApiController {
 
     private final NoticeService noticeService;
 
-    @GetMapping("/api/v1/notice")
+    @GetMapping("/")
     public List<NoticeResponseDto> findAllDesc() {
         return noticeService.findAllDesc();
     }
 
-    @GetMapping("/api/v1/notice/{id}")
+    @GetMapping("/{id}")
     public NoticeResponseDto findById(@PathVariable Long id) {
         return noticeService.findById(id);
     }
 
-    @PostMapping("/api/v1/notice")
+    @PostMapping("/")
     public Long save(@RequestBody NoticeSaveRequestDto requestDto) {
         return noticeService.save(requestDto);
     }
 
-    @PatchMapping("/api/v1/notice/{id}")
+    @PatchMapping("/{id}")
     public Long update(@PathVariable Long id, @RequestBody NoticeUpdateRequestDto requestDto) {
         return noticeService.update(id, requestDto);
     }
 
-    @DeleteMapping("/api/v1/notice/{id}")
+    @DeleteMapping("/{id}")
     public Long delete(@PathVariable Long id) {
         noticeService.delete(id);
         return id;
