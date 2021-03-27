@@ -45,7 +45,6 @@ class NoticeApiControllerTest {
     private int port;
     private String preUrl;
 
-    @Autowired private TestRestTemplate restTemplate;
     @Autowired private NoticeRepository noticeRepository;
     @Autowired private WebApplicationContext context;
     private MockMvc mvc;
