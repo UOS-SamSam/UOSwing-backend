@@ -31,8 +31,8 @@ class NoticeRepositoryTest {
     @Test
     void notice_저장_조회() {
         //given
-//        LocalDateTime now = LocalDateTime.of(2019, 6, 4, 0, 0, 0);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2021, 3, 27, 0, 0, 0);
+
         String title = "테스트 제목";
         String content = "테스트 내용";
         noticeRepository.save(Notice.builder()
