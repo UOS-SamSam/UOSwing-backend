@@ -86,10 +86,13 @@ class ReportApiControllerTest {
                 .build());
 
         Long id = savedReport.getId();
-        String url = preUrl + id;
+        String url1 = preUrl + id;
+        String url2 = preUrl;
 
         //when, then
-        mvc.perform(get(url))
+        mvc.perform(get(url1))      //특정 신고 조회
+                .andExpect(status().isOk());
+        mvc.perform(get(url2))      //신고 목록 조회
                 .andExpect(status().isOk());
     }
 

@@ -151,10 +151,13 @@ class NoticeApiControllerTest {
                 .build());
 
         Long id = savedNotice.getId();
-        String url = preUrl + id;
+        String url1 = preUrl + id;
+        String url2 = preUrl;
 
         //when, then
-        mvc.perform(get(url))
+        mvc.perform(get(url1))      //특정 공지 조회
+                .andExpect(status().isOk());
+        mvc.perform(get(url2))      //공지 목록 조회
                 .andExpect(status().isOk());
     }
 
