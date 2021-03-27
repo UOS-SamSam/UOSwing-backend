@@ -13,23 +13,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     @Bean
-    public Docket apiV1(){
+    public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("groupName1")
+                .groupName("API v1 - 20210328")
                 .select()
-                .apis(RequestHandlerSelectors.
-                        basePackage("javable.controller"))
-                .paths(PathSelectors.ant("/api/v1/padbox/**")).build();
-    }
-
-    @Bean
-    public Docket apiV2(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .useDefaultResponseMessages(false)
-                .groupName("groupName2")
-                .select()
-                .apis(RequestHandlerSelectors.
-                        basePackage("javable.controller"))
-                .paths(PathSelectors.ant("/api/v1/padbox/**")).build();
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.ant("/api/v1/**"))
+                .build();
     }
 }
