@@ -23,7 +23,7 @@ public class PadBoxApiController {
         return padBoxService.findById(id);
     }
 
-    @PutMapping("/api/v1/padbox/updateState/{id}")
+    @PatchMapping("/api/v1/padbox/updateState/{id}")
     public Long updateState(@PathVariable Long id, @RequestBody PadBoxUpdateStateRequestDto requestDto) {
         return padBoxService.updateState(id, requestDto);
     }
@@ -33,7 +33,7 @@ public class PadBoxApiController {
         return padBoxService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/padbox/{id}")
+    @PatchMapping("/api/v1/padbox/{id}")
     public Long update(@PathVariable Long id, @RequestBody PadBoxUpdateRequestDto requestDto) {
         return padBoxService.update(id, requestDto);
     }

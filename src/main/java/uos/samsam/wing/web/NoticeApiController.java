@@ -30,7 +30,7 @@ public class NoticeApiController {
         return noticeService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/notice/{id}")
+    @PatchMapping("/api/v1/notice/{id}")
     public Long update(@PathVariable Long id, @RequestBody NoticeUpdateRequestDto requestDto) {
         return noticeService.update(id, requestDto);
     }
