@@ -58,9 +58,11 @@ class ReportApiControllerTest {
         //given
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
+        Boolean isResolved = false;
         ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
                 .tag(tag)
                 .content(content)
+                .isResolved(isResolved)
                 .build();
 
         String url = preUrl;
@@ -83,6 +85,7 @@ class ReportApiControllerTest {
         Report savedReport = reportRepository.save(Report.builder()
                 .tag(ReportTag.BROKEN)
                 .content("테스트 내용")
+                .isResolved(false)
                 .build());
 
         Long id = savedReport.getId();
@@ -102,6 +105,7 @@ class ReportApiControllerTest {
         Report savedReport = reportRepository.save(Report.builder()
                 .tag(ReportTag.BROKEN)
                 .content("테스트 내용")
+                .isResolved(false)
                 .build());
 
         Long id = savedReport.getId();
@@ -119,6 +123,7 @@ class ReportApiControllerTest {
         Report savedReport = reportRepository.save(Report.builder()
                 .tag(ReportTag.BROKEN)
                 .content("테스트 내용")
+                .isResolved(false)
                 .build());
 
         Long deletedId = savedReport.getId();
