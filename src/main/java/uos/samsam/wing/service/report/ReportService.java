@@ -3,11 +3,14 @@ package uos.samsam.wing.service.report;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import uos.samsam.wing.domain.padbox.PadBox;
+import uos.samsam.wing.domain.padbox.PadBoxRepository;
 import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportRepository;
 import uos.samsam.wing.web.dto.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -15,10 +18,12 @@ import java.util.stream.Collectors;
 public class ReportService {
 
     private final ReportRepository reportRepository;
+    private final PadBoxRepository padBoxRepository;
 
     @Transactional
     public Long save(ReportSaveRequestDto requestDto) {
-        return reportRepository.save(requestDto.toEntity()).getId();
+        Optional<PadBox> padBox = padBoxRepository.findById(requestDto.getPadBoxId());
+        return reportRepository.save(requestDto.toEntity(padBox.get())).getId();
     }
 
     public ReportResponseDto findById(Long id) {

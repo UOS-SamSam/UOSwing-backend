@@ -1,8 +1,10 @@
 package uos.samsam.wing.domain.padbox;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import uos.samsam.wing.domain.report.Report;
 
 import javax.persistence.*;
@@ -37,7 +39,8 @@ public class PadBox {
 
     private Double humidity;    // 습도
 
-    @OneToMany(mappedBy = "padbox")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "padBox", cascade = CascadeType.ALL)
     private List<Report> reportList = new ArrayList<>();
 
     @Builder

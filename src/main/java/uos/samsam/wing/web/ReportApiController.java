@@ -30,7 +30,6 @@ public class ReportApiController {
         return reportService.save(requestDto);
     }
 
-
     @DeleteMapping("/{id}")
     public Long delete(@PathVariable Long id) {
         reportService.delete(id);

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uos.samsam.wing.domain.padbox.PadBox;
+import uos.samsam.wing.domain.padbox.PadBoxRepository;
 import uos.samsam.wing.domain.report.ReportRepository;
 import uos.samsam.wing.domain.report.ReportTag;
 import uos.samsam.wing.web.dto.ReportResponseDto;
@@ -22,6 +24,7 @@ class ReportServiceTest {
 
     @Autowired ReportService reportService;
     @Autowired ReportRepository reportRepository;
+    @Autowired PadBoxRepository padBoxRepository;
 
     @AfterEach
     void cleanup() {
@@ -34,7 +37,19 @@ class ReportServiceTest {
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
         Boolean isResolved = false;
+        PadBox savedPadBox = padBoxRepository.save(PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build());
+        Long savedPadBoxId = savedPadBox.getId();
+
         ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
+                .padBoxId(savedPadBoxId)
                 .tag(tag)
                 .content(content)
                 .isResolved(isResolved)
@@ -45,6 +60,7 @@ class ReportServiceTest {
 
         //then
         ReportResponseDto responseDto = reportService.findById(reportId);
+        assertThat(responseDto.getPadBox().getId()).isEqualTo(savedPadBoxId);
         assertThat(responseDto.getTag()).isEqualTo(tag);
         assertThat(responseDto.getContent()).isEqualTo(content);
         assertThat(responseDto.getIsResolved()).isEqualTo(isResolved);
@@ -56,7 +72,19 @@ class ReportServiceTest {
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
         Boolean isResolved = false;
+        PadBox savedPadBox = padBoxRepository.save(PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build());
+        Long savedPadBoxId = savedPadBox.getId();
+
         ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
+                .padBoxId(savedPadBoxId)
                 .tag(tag)
                 .content(content)
                 .isResolved(isResolved)
@@ -81,11 +109,24 @@ class ReportServiceTest {
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
         Boolean isResolved = false;
+        PadBox savedPadBox = padBoxRepository.save(PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build());
+        Long savedPadBoxId = savedPadBox.getId();
+
         ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
+                .padBoxId(savedPadBoxId)
                 .tag(tag)
                 .content(content)
                 .isResolved(isResolved)
                 .build();
+
         Long id = reportService.save(requestDto);
 
         //when

@@ -1,5 +1,6 @@
 package uos.samsam.wing.domain.report;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,10 @@ public class Report extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="BOX_ID")
-    private PadBox padbox;
+    private PadBox padBox;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -33,8 +35,9 @@ public class Report extends BaseTimeEntity {
     private Boolean isResolved;
 
     @Builder
-    public Report(Long id, ReportTag tag, String content, Boolean isResolved) {
+    public Report(Long id, PadBox padBox, ReportTag tag, String content, Boolean isResolved) {
         this.id = id;
+        this.padBox = padBox;
         this.tag = tag;
         this.content = content;
         this.isResolved = isResolved;

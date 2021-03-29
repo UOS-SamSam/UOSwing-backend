@@ -14,6 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import uos.samsam.wing.domain.padbox.PadBox;
+import uos.samsam.wing.domain.padbox.PadBoxRepository;
 import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportRepository;
 import uos.samsam.wing.domain.report.ReportTag;
@@ -36,6 +38,7 @@ class ReportApiControllerTest {
     private String preUrl;
 
     @Autowired private ReportRepository reportRepository;
+    @Autowired private PadBoxRepository padBoxRepository;
     @Autowired private WebApplicationContext context;
     private MockMvc mvc;
 
@@ -59,7 +62,18 @@ class ReportApiControllerTest {
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
         Boolean isResolved = false;
+        PadBox savedPadBox = padBoxRepository.save(PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build());
+        Long savedPadBoxId = savedPadBox.getId();
         ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
+                .padBoxId(savedPadBoxId)
                 .tag(tag)
                 .content(content)
                 .isResolved(isResolved)
@@ -74,6 +88,7 @@ class ReportApiControllerTest {
 
         //then
         List<Report> reportList = reportRepository.findAll();
+        assertThat(reportList.get(0).getPadBox().getId()).isEqualTo(savedPadBoxId);
         assertThat(reportList.get(0).getTag()).isEqualTo(tag);
         assertThat(reportList.get(0).getContent()).isEqualTo(content);
     }
@@ -82,11 +97,23 @@ class ReportApiControllerTest {
     @WithMockUser(roles = "ADMIN")
     void 신고_조회() throws Exception {
         //given
+        PadBox padBox = PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build();
+
         Report savedReport = reportRepository.save(Report.builder()
+                .padBox(padBox)
                 .tag(ReportTag.BROKEN)
                 .content("테스트 내용")
                 .isResolved(false)
                 .build());
+
 
         Long id = savedReport.getId();
         String url1 = preUrl + id;
@@ -102,7 +129,17 @@ class ReportApiControllerTest {
     @Test
     void 신고_조회_실패() throws Exception {
         //given
+        PadBox padBox = PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build();
         Report savedReport = reportRepository.save(Report.builder()
+                .padBox(padBox)
                 .tag(ReportTag.BROKEN)
                 .content("테스트 내용")
                 .isResolved(false)
@@ -120,7 +157,17 @@ class ReportApiControllerTest {
     @WithMockUser(roles = "ADMIN")
     void 신고_삭제() throws Exception {
         //given
+        PadBox padBox = PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build();
         Report savedReport = reportRepository.save(Report.builder()
+                .padBox(padBox)
                 .tag(ReportTag.BROKEN)
                 .content("테스트 내용")
                 .isResolved(false)

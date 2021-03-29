@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uos.samsam.wing.domain.padbox.PadBox;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,7 +37,18 @@ class ReportRepositoryTest {
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
         Boolean isResolved = false;
+        PadBox padBox = PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build();
+
         reportRepository.save(Report.builder()
+                .padBox(padBox)
                 .tag(tag)
                 .content(content)
                 .isResolved(isResolved)
@@ -47,6 +59,7 @@ class ReportRepositoryTest {
 
         //then
         Report report = reportList.get(0);
+        assertThat(report.getPadBox().getId()).isEqualTo(padBox.getId());
         assertThat(report.getTag()).isEqualTo(tag);
         assertThat(report.getContent()).isEqualTo(content);
         assertThat(report.getIsResolved()).isEqualTo(isResolved);
