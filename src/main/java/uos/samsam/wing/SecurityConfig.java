@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/notice/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/report/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/padbox/**").permitAll()
                 .antMatchers("/api/v1/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
     }
