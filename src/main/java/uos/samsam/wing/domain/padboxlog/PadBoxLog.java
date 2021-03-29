@@ -23,12 +23,10 @@ public class PadBoxLog extends BaseTimeEntity {
     private PadBox padBox;          // 사용된 PadBox
 
     private Integer usedAmount;         // 사용 갯수
-    private LocalDateTime updatedDate;
 
     @Builder
     public PadBoxLog(PadBox padBox, Integer usedAmount, LocalDateTime updatedDate) {
         this.padBox = padBox;
         this.usedAmount = usedAmount;
-        this.updatedDate = updatedDate;
     }
 }

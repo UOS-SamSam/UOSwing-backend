@@ -162,7 +162,7 @@ class PadBoxServiceTest {
         PadBoxLog padBoxLog = padBoxLogList.get(0);
         assertThat(padBoxLog.getUsedAmount()).isEqualTo(10);
         assertThat(padBoxLog.getPadBox().getId()).isEqualTo(id);
-        assertThat(padBoxLog.getUpdatedDate()).isAfter(now);
+        assertThat(padBoxLog.getCreatedDate()).isAfter(now);
     }
 
     @Test
