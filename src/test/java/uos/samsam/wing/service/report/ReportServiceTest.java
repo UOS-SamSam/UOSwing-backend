@@ -10,6 +10,7 @@ import uos.samsam.wing.domain.report.ReportRepository;
 import uos.samsam.wing.domain.report.ReportTag;
 import uos.samsam.wing.web.dto.ReportResponseDto;
 import uos.samsam.wing.web.dto.ReportSaveRequestDto;
+import uos.samsam.wing.web.dto.ReportUpdateRequestDto;
 
 import java.util.List;
 
@@ -32,9 +33,11 @@ class ReportServiceTest {
         //given
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
+        Boolean isResolved = false;
         ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
                 .tag(tag)
                 .content(content)
+                .isResolved(isResolved)
                 .build();
 
         //when
@@ -44,16 +47,44 @@ class ReportServiceTest {
         ReportResponseDto responseDto = reportService.findById(reportId);
         assertThat(responseDto.getTag()).isEqualTo(tag);
         assertThat(responseDto.getContent()).isEqualTo(content);
+        assertThat(responseDto.getIsResolved()).isEqualTo(isResolved);
     }
 
     @Test
-    void 공지_삭제() {
+    void 신고_상태_수정() {
         //given
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
+        Boolean isResolved = false;
         ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
                 .tag(tag)
                 .content(content)
+                .isResolved(isResolved)
+                .build();
+        Long id = reportService.save(requestDto);
+
+        //when
+        Boolean newIsResolved = true;
+        ReportUpdateRequestDto updateRequestDto = ReportUpdateRequestDto.builder()
+                .isResolved(newIsResolved)
+                .build();
+        reportService.update(id, updateRequestDto);
+
+        //then
+        ReportResponseDto responseDto = reportService.findById(id);
+        assertThat(responseDto.getIsResolved()).isEqualTo(newIsResolved);
+    }
+
+    @Test
+    void 신고_삭제() {
+        //given
+        ReportTag tag = ReportTag.BROKEN;
+        String content = "테스트 내용";
+        Boolean isResolved = false;
+        ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
+                .tag(tag)
+                .content(content)
+                .isResolved(isResolved)
                 .build();
         Long id = reportService.save(requestDto);
 

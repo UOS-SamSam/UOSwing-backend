@@ -35,9 +35,11 @@ class ReportRepositoryTest {
         LocalDateTime now = LocalDateTime.of(2021, 3, 27, 0, 0, 0);
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
+        Boolean isResolved = false;
         reportRepository.save(Report.builder()
                 .tag(tag)
                 .content(content)
+                .isResolved(isResolved)
                 .build());
 
         //when
@@ -47,8 +49,7 @@ class ReportRepositoryTest {
         Report report = reportList.get(0);
         assertThat(report.getTag()).isEqualTo(tag);
         assertThat(report.getContent()).isEqualTo(content);
-        assertThat(report.getCreatedDate()).isAfter(now);
-        System.out.println("notice.getCreatedDate() = " + report.getCreatedDate());
+        assertThat(report.getIsResolved()).isEqualTo(isResolved);
         assertThat(report.getCreatedDate()).isAfter(now);
     }
 }
