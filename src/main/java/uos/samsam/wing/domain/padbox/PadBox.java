@@ -3,8 +3,11 @@ package uos.samsam.wing.domain.padbox;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import uos.samsam.wing.domain.report.Report;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -33,6 +36,9 @@ public class PadBox {
     private Double temperature; // 온도
 
     private Double humidity;    // 습도
+
+    @OneToMany(mappedBy = "padbox")
+    private List<Report> reportList = new ArrayList<>();
 
     @Builder
     public PadBox(Double latitude, Double longitude, String address, String name, int padAmount, Double temperature, Double humidity) {

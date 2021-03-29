@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import uos.samsam.wing.domain.BaseTimeEntity;
+import uos.samsam.wing.domain.padbox.PadBox;
 
 import javax.persistence.*;
 
@@ -15,6 +16,10 @@ public class Report extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name="BOX_ID")
+    private PadBox padbox;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
