@@ -61,9 +61,11 @@ public class PadBox {
         this.name = name;
     }
 
-    public void updateState(int padAmount, Double temperature, Double humidity) {
+    public Integer updateState(Integer padAmount, Double temperature, Double humidity) {
+        Integer diff = this.padAmount - padAmount;
         this.padAmount = padAmount;
         this.temperature = temperature;
         this.humidity = humidity;
+        return diff;
     }
 }

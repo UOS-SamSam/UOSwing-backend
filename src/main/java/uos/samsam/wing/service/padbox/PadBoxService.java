@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.padbox.PadBoxRepository;
+import uos.samsam.wing.domain.padboxlog.PadBoxLog;
+import uos.samsam.wing.domain.padboxlog.PadBoxLogRepository;
 import uos.samsam.wing.web.dto.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,7 @@ import java.util.stream.Collectors;
 public class PadBoxService {
 
     private final PadBoxRepository padBoxRepository;
+    private final PadBoxLogRepository padBoxLogRepository;
 
     @Transactional
     public Long save(PadBoxSaveRequestDto requestDto) {
@@ -36,7 +40,14 @@ public class PadBoxService {
     public Long updateState(Long id, PadBoxUpdateStateRequestDto requestDto) {
         PadBox padBox = padBoxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("[id:" + id + "]해당 보관함이 없습니다."));
-        padBox.updateState(requestDto.getPadAmount(), requestDto.getTemperature(), requestDto.getHumidity());
+        Integer diff = padBox.updateState(requestDto.getPadAmount(), requestDto.getTemperature(), requestDto.getHumidity());
+        if (diff > 0) {
+            padBoxLogRepository.save(PadBoxLog.builder()
+                    .padBox(padBox)
+                    .usedAmount(diff)
+                    .updatedDate(LocalDateTime.now())
+                    .build());
+        }
         return id;
     }
 

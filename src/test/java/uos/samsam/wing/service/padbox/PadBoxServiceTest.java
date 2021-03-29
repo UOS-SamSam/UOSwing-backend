@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.padbox.PadBoxRepository;
+import uos.samsam.wing.domain.padboxlog.PadBoxLog;
+import uos.samsam.wing.domain.padboxlog.PadBoxLogRepository;
 import uos.samsam.wing.web.dto.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +22,11 @@ class PadBoxServiceTest {
 
     @Autowired PadBoxRepository padBoxRepository;
     @Autowired PadBoxService padBoxService;
+    @Autowired PadBoxLogRepository padBoxLogRepository;
 
     @AfterEach
     void cleanup() {
+        padBoxLogRepository.deleteAll();
         padBoxRepository.deleteAll();
     }
 
@@ -114,7 +119,7 @@ class PadBoxServiceTest {
         Double longitude = 127.058305;
         String address = "서울특별시 동대문구 전농2동 89-14";
         String name = "21세기관";
-        Integer padAmount = 0;
+        Integer padAmount = 10;
         Double temperature = 21.0;
         Double humidity = 35.0;
         PadBoxSaveRequestDto saveRequestDto = PadBoxSaveRequestDto.builder()
@@ -128,7 +133,8 @@ class PadBoxServiceTest {
                 .build();
         Long id = padBoxService.save(saveRequestDto);
 
-        Integer nextPadAmount = 10;
+        LocalDateTime now = LocalDateTime.now();
+        Integer nextPadAmount = 0;
         Double nextTemperature = 23.0;
         Double nextHumidity = 34.0;
         PadBoxUpdateStateRequestDto updateRequestDto = PadBoxUpdateStateRequestDto.builder()
@@ -150,6 +156,12 @@ class PadBoxServiceTest {
         assertThat(padBox.getPadAmount()).isEqualTo(nextPadAmount);
         assertThat(padBox.getTemperature()).isEqualTo(nextTemperature);
         assertThat(padBox.getHumidity()).isEqualTo(nextHumidity);
+
+        List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
+        PadBoxLog padBoxLog = padBoxLogList.get(0);
+        assertThat(padBoxLog.getUsedAmount()).isEqualTo(10);
+        assertThat(padBoxLog.getPadBox().getId()).isEqualTo(id);
+        assertThat(padBoxLog.getUpdatedDate()).isAfter(now);
     }
 
     @Test
