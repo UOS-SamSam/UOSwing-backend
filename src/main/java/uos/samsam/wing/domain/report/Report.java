@@ -24,15 +24,18 @@ public class Report extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private Boolean isResolved;
+
     @Builder
-    public Report(Long id, ReportTag tag, String content) {
+    public Report(Long id, ReportTag tag, String content, Boolean isResolved) {
         this.id = id;
         this.tag = tag;
         this.content = content;
+        this.isResolved = isResolved;
     }
 
-    public void update(ReportTag tag, String content) {
-        this.tag = tag;
-        this.content = content;
+    public void update(Boolean isResolved) {
+        this.isResolved = isResolved;
     }
 }

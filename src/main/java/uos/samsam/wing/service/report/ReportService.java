@@ -36,6 +36,15 @@ public class ReportService {
     }
 
     @Transactional
+    public Long update(Long id, ReportUpdateRequestDto requestDto) {
+        Report report = reportRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 신고가 없습니다. id=" + id));
+        report.update(requestDto.getIsResolved());
+
+        return id;
+    }
+
+    @Transactional
     public void delete(Long id) {
         Report report = reportRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 신고가 없습니다. id=" + id));
