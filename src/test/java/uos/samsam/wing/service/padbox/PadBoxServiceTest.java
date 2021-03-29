@@ -156,6 +156,7 @@ class PadBoxServiceTest {
         assertThat(padBox.getPadAmount()).isEqualTo(nextPadAmount);
         assertThat(padBox.getTemperature()).isEqualTo(nextTemperature);
         assertThat(padBox.getHumidity()).isEqualTo(nextHumidity);
+        assertThat(padBox.getUpdatedStateDate()).isAfter(now);
 
         List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
         PadBoxLog padBoxLog = padBoxLogList.get(0);
