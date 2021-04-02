@@ -18,8 +18,8 @@ public class PadBoxLogService {
     private final PadBoxLogRepository padBoxLogRepository;
 
     @Transactional
-    public List<StatisticsResponseDto> statistics(int duration) {
-        LocalDateTime deleteLimit = LocalDateTime.now().minusDays(30);
+    public List<StatisticsResponseDto> statistics(Integer duration) {
+        LocalDateTime deleteLimit = LocalDateTime.now().minusDays(365);
         LocalDateTime begin = LocalDateTime.now().minusDays(duration);
         Map<String, Integer> counter = new TreeMap<String, Integer>(Collections.reverseOrder());
 
@@ -27,10 +27,10 @@ public class PadBoxLogService {
         for (PadBoxLog padBoxLog : padBoxLogList) {
             if (padBoxLog.getCreatedDate().isBefore(deleteLimit)) {
                 padBoxLogRepository.delete(padBoxLog);
-            } else if (padBoxLog.getCreatedDate().isAfter(begin)) {
+            } else if (padBoxLog.getCreatedDate().isAfter(begin) && padBoxLog.getUsedAmount() < 0) {
                 String padBoxName = padBoxLog.getPadBox().getName();
                 Integer beforeValue = counter.get(padBoxName);
-                counter.put(padBoxName, beforeValue == null ? 1 : beforeValue + 1);
+                counter.put(padBoxName, beforeValue == null ? -padBoxLog.getUsedAmount() : beforeValue + -padBoxLog.getUsedAmount());
             }
         }
 
