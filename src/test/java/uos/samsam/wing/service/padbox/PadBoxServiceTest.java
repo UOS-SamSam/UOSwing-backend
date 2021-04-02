@@ -160,7 +160,7 @@ class PadBoxServiceTest {
 
         List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
         PadBoxLog padBoxLog = padBoxLogList.get(0);
-        assertThat(padBoxLog.getUsedAmount()).isEqualTo(10);
+        assertThat(padBoxLog.getUsedAmount()).isEqualTo(-10);
         assertThat(padBoxLog.getPadBox().getId()).isEqualTo(id);
         assertThat(padBoxLog.getCreatedDate()).isAfter(now);
     }
@@ -226,6 +226,7 @@ class PadBoxServiceTest {
         assertThat(responseDto.getPadAmount()).isEqualTo(padAmount);
         assertThat(responseDto.getTemperature()).isEqualTo(temperature);
         assertThat(responseDto.getHumidity()).isEqualTo(humidity);
+        assertThat(responseDto.getIsReported()).isFalse();
     }
 
     @Test
@@ -276,5 +277,7 @@ class PadBoxServiceTest {
         assertThat(responseDtoList.get(0)).isNotEqualTo(responseDtoList.get(1));
         assertTrue(names.contains(responseDtoList.get(0).getName()));
         assertTrue(names.contains(responseDtoList.get(1).getName()));
+        assertThat(responseDtoList.get(0).getIsReported()).isFalse();
+        assertThat(responseDtoList.get(1).getIsReported()).isFalse();
     }
 }
