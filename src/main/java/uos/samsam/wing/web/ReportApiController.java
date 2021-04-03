@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import uos.samsam.wing.service.report.ReportService;
 import uos.samsam.wing.web.dto.ReportResponseDto;
 import uos.samsam.wing.web.dto.ReportSaveRequestDto;
+import uos.samsam.wing.web.dto.ReportUpdateRequestDto;
 
 import java.util.List;
 
@@ -28,6 +29,11 @@ public class ReportApiController {
     @PostMapping("/")
     public Long save(@RequestBody ReportSaveRequestDto requestDto) {
         return reportService.save(requestDto);
+    }
+
+    @PatchMapping("/{id}")
+    public Long update(@PathVariable Long id, @RequestBody ReportUpdateRequestDto requestDto) {
+        return reportService.update(id, requestDto);
     }
 
     @DeleteMapping("/{id}")
