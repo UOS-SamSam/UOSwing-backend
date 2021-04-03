@@ -107,8 +107,6 @@ class NoticeApiControllerTest {
 
         String url = preUrl + updateId;
 
-        HttpEntity<NoticeUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
-
         //when
         mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON)
         .content(new ObjectMapper().writeValueAsString(requestDto)))

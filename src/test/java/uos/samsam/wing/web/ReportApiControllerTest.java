@@ -20,6 +20,7 @@ import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportRepository;
 import uos.samsam.wing.domain.report.ReportTag;
 import uos.samsam.wing.web.dto.ReportSaveRequestDto;
+import uos.samsam.wing.web.dto.ReportUpdateRequestDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -151,6 +152,45 @@ class ReportApiControllerTest {
         //when, then
         mvc.perform(get(url))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void 신고_상태_수정() throws Exception {
+        //given
+        PadBox padBox = PadBox.builder()
+                .latitude(3.3)
+                .longitude(3.3)
+                .address("서울")
+                .name("어딘가")
+                .padAmount(999)
+                .temperature(33.3)
+                .humidity(33.3)
+                .build();
+        Report savedReport = reportRepository.save(Report.builder()
+                .padBox(padBox)
+                .tag(ReportTag.BROKEN)
+                .content("테스트 내용")
+                .isResolved(false)
+                .build());
+
+        Long updatedId = savedReport.getId();
+        Boolean expectedIsResolved = true;
+
+        ReportUpdateRequestDto requestDto = ReportUpdateRequestDto.builder()
+                .isResolved(expectedIsResolved)
+                .build();
+
+        String url = preUrl + updatedId;
+
+        //when
+        mvc.perform(patch(url).contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(requestDto)))
+                .andExpect(status().isOk());
+
+        //then
+        List<Report> reportList = reportRepository.findAll();
+        assertThat(reportList.get(0).getIsResolved()).isEqualTo(expectedIsResolved);
     }
 
     @Test
