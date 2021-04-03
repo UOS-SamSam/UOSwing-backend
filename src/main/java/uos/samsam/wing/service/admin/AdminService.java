@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import uos.samsam.wing.auth.AuthenticationToken;
+import uos.samsam.wing.auth.JwtAuthenticationTokenProvider;
 import uos.samsam.wing.domain.admin.Admin;
 import uos.samsam.wing.domain.admin.AdminRepository;
 import uos.samsam.wing.web.dto.AdminLoginRequestDto;
@@ -18,6 +20,7 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtAuthenticationTokenProvider jwtAuthenticationTokenProvider;
 
     @Transactional
     public void createAdmin(AdminSaveRequestDto requestDto) {
@@ -37,13 +40,14 @@ public class AdminService {
     }
 
     @Transactional
-    public Boolean login(AdminLoginRequestDto requestDto) {
+    public AuthenticationToken login(AdminLoginRequestDto requestDto) {
         List<Admin> adminList = adminRepository.findAll();
         for (Admin admin : adminList) {
             boolean isMatched = passwordEncoder.matches(requestDto.getKey(), admin.getKey());
-            if(isMatched)
-                return true;
+            if(isMatched) {
+                return jwtAuthenticationTokenProvider.issue(admin.getId());
+            }
         }
-        return false;
+        return null;
     }
 }

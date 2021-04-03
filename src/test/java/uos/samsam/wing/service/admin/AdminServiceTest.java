@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uos.samsam.wing.auth.AuthenticationToken;
+import uos.samsam.wing.auth.JwtAuthenticationTokenProvider;
 import uos.samsam.wing.domain.admin.Admin;
 import uos.samsam.wing.domain.admin.AdminRepository;
 import uos.samsam.wing.web.dto.AdminLoginRequestDto;
@@ -24,6 +26,7 @@ class AdminServiceTest {
     @Autowired AdminRepository adminRepository;
     @Autowired AdminService adminService;
     @Autowired PasswordEncoder passwordEncoder;
+    @Autowired JwtAuthenticationTokenProvider jwtAuthenticationTokenProvider;
 
     @AfterEach
     void cleanup() {
@@ -58,10 +61,11 @@ class AdminServiceTest {
                                                                 .key(key)
                                                                 .build();
         //when
-        Boolean ok = adminService.login(requestDto);
+        AuthenticationToken token = adminService.login(requestDto);
 
         //then
-        assertThat(ok).isTrue();
+        System.out.println("token.getToken() = " + token.getToken());
+        assertThat(token).isNotNull();
     }
 
     @Test
@@ -76,9 +80,9 @@ class AdminServiceTest {
                 .key(wrongKey)
                 .build();
         //when
-        Boolean ok = adminService.login(requestDto);
+        AuthenticationToken token = adminService.login(requestDto);
 
         //then
-        assertThat(ok).isFalse();
+        assertThat(token).isNull();
     }
 }
