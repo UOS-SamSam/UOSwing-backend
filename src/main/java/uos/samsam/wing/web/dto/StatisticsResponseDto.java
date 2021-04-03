@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class StatisticsResponseDto {
+    private Long padBoxId;
     private String padBoxName;
     private Integer amount;
 
     @Builder
-    public StatisticsResponseDto(String padBoxName, Integer amount) {
+    public StatisticsResponseDto(Long padBoxId, String padBoxName, Integer amount) {
+        this.padBoxId = padBoxId;
         this.padBoxName = padBoxName;
         this.amount = amount;
     }

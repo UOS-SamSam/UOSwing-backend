@@ -41,7 +41,7 @@ public class PadBoxService {
         PadBox padBox = padBoxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("[id:" + id + "]해당 보관함이 없습니다."));
         Integer diff = padBox.updateState(requestDto.getPadAmount(), requestDto.getTemperature(), requestDto.getHumidity());
-        if (diff > 0) {
+        if (diff != 0) {
             padBoxLogRepository.save(PadBoxLog.builder()
                     .padBox(padBox)
                     .usedAmount(diff)
@@ -58,6 +58,7 @@ public class PadBoxService {
         padBoxRepository.delete(padBox);
     }
 
+    @Transactional
     public PadBoxResponseDto findById(Long id) {
         PadBox entity = padBoxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("[id:" + id + "]해당 보관함이 없습니다."));

@@ -13,6 +13,7 @@ public class PadBoxResponseDto {
     private Integer padAmount;      // 남은 수량
     private Double temperature; // 온도
     private Double humidity;    // 습도
+    private Boolean isReported; // 신고 유무
 
     public PadBoxResponseDto(PadBox entity) {
         this.id = entity.getId();
@@ -23,5 +24,6 @@ public class PadBoxResponseDto {
         this.padAmount = entity.getPadAmount();
         this.temperature = entity.getTemperature();
         this.humidity = entity.getHumidity();
+        this.isReported = !entity.getReportList().isEmpty();
     }
 }

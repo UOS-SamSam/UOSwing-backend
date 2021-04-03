@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.padbox.PadBoxRepository;
+import uos.samsam.wing.domain.padboxlog.PadBoxLogRepository;
 import uos.samsam.wing.web.dto.PadBoxSaveRequestDto;
 import uos.samsam.wing.web.dto.PadBoxUpdateRequestDto;
 import uos.samsam.wing.web.dto.PadBoxUpdateStateRequestDto;
@@ -41,6 +42,7 @@ class PadBoxApiControllerTest {
     private String preUrl;
 
     @Autowired private PadBoxRepository padBoxRepository;
+    @Autowired private PadBoxLogRepository padBoxLogRepository;
     @Autowired private WebApplicationContext context;
     private MockMvc mvc;
 
@@ -55,6 +57,7 @@ class PadBoxApiControllerTest {
 
     @AfterEach
     void tearDown() {
+        padBoxLogRepository.deleteAll();
         padBoxRepository.deleteAll();
     }
 
