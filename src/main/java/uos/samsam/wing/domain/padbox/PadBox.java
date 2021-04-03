@@ -8,6 +8,7 @@ import lombok.ToString;
 import uos.samsam.wing.domain.report.Report;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class PadBox {
 
     private Double humidity;    // 습도
 
+    private LocalDateTime updatedStateDate;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "padBox", cascade = CascadeType.ALL)
     private List<Report> reportList = new ArrayList<>();
@@ -59,13 +62,15 @@ public class PadBox {
         this.longitude = longitude;
         this.address = address;
         this.name = name;
+        this.updatedStateDate = LocalDateTime.now();
     }
 
     public Integer updateState(Integer padAmount, Double temperature, Double humidity) {
-        Integer diff = this.padAmount - padAmount;
+        Integer diff = padAmount - this.padAmount;
         this.padAmount = padAmount;
         this.temperature = temperature;
         this.humidity = humidity;
+        this.updatedStateDate = LocalDateTime.now();
         return diff;
     }
 }

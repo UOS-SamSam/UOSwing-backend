@@ -18,29 +18,36 @@ public class PadBoxLogService {
     private final PadBoxLogRepository padBoxLogRepository;
 
     @Transactional
-    public List<StatisticsResponseDto> statistics(int duration) {
-        LocalDateTime deleteLimit = LocalDateTime.now().minusDays(30);
+    public List<StatisticsResponseDto> statistics(Integer duration) {
+        LocalDateTime deleteLimit = LocalDateTime.now().minusDays(365);
         LocalDateTime begin = LocalDateTime.now().minusDays(duration);
-        Map<String, Integer> counter = new TreeMap<String, Integer>(Collections.reverseOrder());
+        Map<PadBox, Integer> counter = new HashMap<>();
 
         List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
         for (PadBoxLog padBoxLog : padBoxLogList) {
             if (padBoxLog.getCreatedDate().isBefore(deleteLimit)) {
                 padBoxLogRepository.delete(padBoxLog);
-            } else if (padBoxLog.getCreatedDate().isAfter(begin)) {
-                String padBoxName = padBoxLog.getPadBox().getName();
-                Integer beforeValue = counter.get(padBoxName);
-                counter.put(padBoxName, beforeValue == null ? 1 : beforeValue + 1);
+            } else if (padBoxLog.getCreatedDate().isAfter(begin) && padBoxLog.getUsedAmount() < 0) {
+                PadBox padBox = padBoxLog.getPadBox();
+                Integer beforeValue = counter.get(padBox);
+                counter.put(padBox, beforeValue == null ? -padBoxLog.getUsedAmount() : beforeValue + -padBoxLog.getUsedAmount());
             }
         }
 
         List<StatisticsResponseDto> responseDtoList = new LinkedList<>();
-        for (Map.Entry<String, Integer> entry : counter.entrySet()) {
+        for (Map.Entry<PadBox, Integer> entry : counter.entrySet()) {
             responseDtoList.add(StatisticsResponseDto.builder()
-                    .padBoxName(entry.getKey())
+                    .padBoxId(entry.getKey().getId())
+                    .padBoxName(entry.getKey().getName())
                     .amount(entry.getValue())
                     .build());
         }
+        Collections.sort(responseDtoList, new Comparator<StatisticsResponseDto>() {
+            @Override
+            public int compare(StatisticsResponseDto obj1, StatisticsResponseDto obj2) {
+                return obj2.getAmount().compareTo(obj1.getAmount());
+            }
+        });
         return responseDtoList;
     }
 }

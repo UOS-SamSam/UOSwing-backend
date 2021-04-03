@@ -63,7 +63,6 @@ class PadBoxLogRepositoryTest {
         PadBoxLog padBoxLog = padBoxLogList.get(0);
         assertThat(padBoxLog.getUsedAmount()).isEqualTo(usedAmount);
         assertThat(padBoxLog.getCreatedDate()).isAfter(now);
-        assertThat(padBoxLog.getUpdatedDate()).isAfter(now);
         assertThat(padBox.getId()).isEqualTo(padBoxLog.getPadBox().getId());
         assertThat(padBox.getName()).isEqualTo(padBoxLog.getPadBox().getName());
     }
