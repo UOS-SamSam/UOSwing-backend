@@ -1,7 +1,6 @@
 package uos.samsam.wing;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,10 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import uos.samsam.wing.auth.AuthenticationTokenProvider;
 import uos.samsam.wing.auth.JwtAuthenticationFilter;
 import uos.samsam.wing.auth.JwtTokenProvider;
-import uos.samsam.wing.domain.user.UserRepository;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
