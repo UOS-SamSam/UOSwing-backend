@@ -1,4 +1,4 @@
-package uos.samsam.wing.domain.admin;
+package uos.samsam.wing.domain.user;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class AdministratorRepositoryTest {
+class UserRepositoryTest {
 
     @Autowired
-    AdminRepository administratorRepository;
+    UserRepository administratorRepository;
 
     @AfterEach
     void cleanup() {
@@ -26,31 +26,36 @@ class AdministratorRepositoryTest {
     @Test
     void admin_저장_조회() {
         //given
+        String email = "samsam-uos@gmail.com";
         String key = "테스트 키";
-        administratorRepository.save(Admin.builder()
-                .key(key)
+        administratorRepository.save(User.builder()
+                .email(email)
+                .password(key)
                 .build());
 
         //when
-        List<Admin> administratorList = administratorRepository.findAll();
+        List<User> administratorList = administratorRepository.findAll();
 
         //then
-        Admin administrator = administratorList.get(0);
-        assertThat(administrator.getKey()).isEqualTo(key);
+        User administrator = administratorList.get(0);
+        assertThat(administrator.getPassword()).isEqualTo(key);
     }
 
     @Test
     void admin_키로_찾기() {
         //given
+        String email = "samsam-uos@gmail.com";
         String key = "테스트 키";
-        administratorRepository.save(Admin.builder()
-            .key(key)
-            .build());
+        administratorRepository.save(User.builder()
+                .email(email)
+                .password(key)
+                .build());
 
         //when
-        Admin admin = administratorRepository.findByKey(key);
+        User user = administratorRepository.findByEmail(email).get();
 
         //then
-        assertThat(admin.getKey()).isEqualTo(key);
+        assertThat(user.getEmail()).isEqualTo(email);
+        assertThat(user.getPassword()).isEqualTo(key);
     }
 }
