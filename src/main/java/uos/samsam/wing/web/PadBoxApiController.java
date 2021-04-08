@@ -14,7 +14,7 @@ public class PadBoxApiController {
 
     private final PadBoxService padBoxService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<PadBoxListResponseDto> findAll() {
         return padBoxService.findAll();
     }
@@ -29,7 +29,7 @@ public class PadBoxApiController {
         return padBoxService.updateState(id, requestDto);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Long save(@RequestBody PadBoxSaveRequestDto requestDto) {
         return padBoxService.save(requestDto);
     }

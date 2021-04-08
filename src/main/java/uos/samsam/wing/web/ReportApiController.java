@@ -16,7 +16,7 @@ public class ReportApiController {
 
     private final ReportService reportService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<ReportResponseDto> findAll() {
         return reportService.findAll();
     }
@@ -26,7 +26,7 @@ public class ReportApiController {
         return reportService.findById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Long save(@RequestBody ReportSaveRequestDto requestDto) {
         return reportService.save(requestDto);
     }
