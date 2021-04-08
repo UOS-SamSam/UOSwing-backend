@@ -16,7 +16,7 @@ public class NoticeApiController {
 
     private final NoticeService noticeService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<NoticeResponseDto> findAllDesc() {
         return noticeService.findAllDesc();
     }
@@ -26,7 +26,7 @@ public class NoticeApiController {
         return noticeService.findById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public Long save(@RequestBody NoticeSaveRequestDto requestDto) {
         return noticeService.save(requestDto);
     }
