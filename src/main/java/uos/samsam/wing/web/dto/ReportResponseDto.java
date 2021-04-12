@@ -6,6 +6,8 @@ import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportTag;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 public class ReportResponseDto {
@@ -15,6 +17,7 @@ public class ReportResponseDto {
     private ReportTag tag;
     private String content;
     private Boolean isResolved;
+    private LocalDateTime createdDate;
 
     public ReportResponseDto(Report entity) {
         this.id = entity.getId();
@@ -22,5 +25,6 @@ public class ReportResponseDto {
         this.tag = entity.getTag();
         this.content = entity.getContent();
         this.isResolved = entity.getIsResolved();
+        this.createdDate = entity.getCreatedDate();
     }
 }

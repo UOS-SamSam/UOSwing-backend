@@ -14,6 +14,7 @@ import uos.samsam.wing.web.dto.ReportResponseDto;
 import uos.samsam.wing.web.dto.ReportSaveRequestDto;
 import uos.samsam.wing.web.dto.ReportUpdateRequestDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,6 +65,7 @@ class ReportServiceTest {
         assertThat(responseDto.getTag()).isEqualTo(tag);
         assertThat(responseDto.getContent()).isEqualTo(content);
         assertThat(responseDto.getIsResolved()).isEqualTo(isResolved);
+        assertThat(responseDto.getCreatedDate()).isBefore(LocalDateTime.now());
     }
 
     @Test
