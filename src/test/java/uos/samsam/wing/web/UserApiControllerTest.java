@@ -149,6 +149,6 @@ class UserApiControllerTest {
         //when, then
         mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
-                .andExpect(status().isUnauthorized());  //인증 실패
+                .andExpect(status().isBadRequest());  //인증 실패
     }
 }
