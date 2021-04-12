@@ -1,20 +1,31 @@
 package uos.samsam.wing.web.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import uos.samsam.wing.domain.padbox.PadBox;
 
+@ApiModel(value = "PadBoxSaveRequest(생리대함 저장 정보)", description = "생리대함 저장에 대한 요청입니다.")
 @Getter
 @NoArgsConstructor
 public class PadBoxSaveRequestDto {
-    private Double latitude;    // 위도
-    private Double longitude;   // 경도
-    private String address;     // 주소
-    private String name;        // 이름
-    private Integer padAmount;      // 남은 수량
-    private Double temperature; // 온도
-    private Double humidity;    // 습도
+
+    @ApiModelProperty(value = "위도")
+    private Double latitude;
+    @ApiModelProperty(value = "경도")
+    private Double longitude;
+    @ApiModelProperty(value = "주소")
+    private String address;
+    @ApiModelProperty(value = "생리대함 이름")
+    private String name;
+    @ApiModelProperty(value = "남은 생리대 수량")
+    private Integer padAmount;
+    @ApiModelProperty(value = "현재 온도")
+    private Double temperature;
+    @ApiModelProperty(value = "현재 습도")
+    private Double humidity;
 
     @Builder
     public PadBoxSaveRequestDto(Double latitude, Double longitude, String address, String name, Integer padAmount, Double temperature, Double humidity) {

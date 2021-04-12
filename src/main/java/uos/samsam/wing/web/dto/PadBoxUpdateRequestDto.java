@@ -1,16 +1,24 @@
 package uos.samsam.wing.web.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@ApiModel(value = "PadBoxUpdateRequest(생리대함 수정 정보)", description = "생리대함 수정에 대한 요청입니다.")
 @Getter
 @NoArgsConstructor
 public class PadBoxUpdateRequestDto {
-    private Double latitude;    // 위도
-    private Double longitude;   // 경도
-    private String address;     // 주소
-    private String name;        // 이름
+
+    @ApiModelProperty(value = "수정된 위도")
+    private Double latitude;
+    @ApiModelProperty(value = "수정된 경도")
+    private Double longitude;
+    @ApiModelProperty(value = "수정된 주소")
+    private String address;
+    @ApiModelProperty(value = "수정된 생리대함 이름")
+    private String name;
 
     @Builder
     public PadBoxUpdateRequestDto(Double latitude, Double longitude, String address, String name) {
