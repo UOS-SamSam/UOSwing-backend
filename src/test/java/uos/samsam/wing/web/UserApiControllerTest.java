@@ -147,12 +147,8 @@ class UserApiControllerTest {
         String url = preUrl + "login";
 
         //when, then
-        MvcResult result = mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(post(url).contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        System.out.println("result = " + result.getResponse().getContentAsString());
-        assertThat(result.getResponse().getContentAsString().length()).isGreaterThan(0);
+                .andExpect(status().isUnauthorized());  //인증 실패
     }
 }
