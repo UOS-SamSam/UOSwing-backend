@@ -11,6 +11,7 @@ import uos.samsam.wing.web.dto.NoticeResponseDto;
 import uos.samsam.wing.web.dto.NoticeSaveRequestDto;
 import uos.samsam.wing.web.dto.NoticeUpdateRequestDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,6 +45,7 @@ class NoticeServiceTest {
         NoticeResponseDto responseDto = noticeService.findById(noticeId);
         assertThat(responseDto.getTitle()).isEqualTo(title);
         assertThat(responseDto.getContent()).isEqualTo(content);
+        assertThat(responseDto.getCreatedDate()).isBefore(LocalDateTime.now());
     }
 
     @Test
