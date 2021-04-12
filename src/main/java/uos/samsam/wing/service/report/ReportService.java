@@ -26,6 +26,7 @@ public class ReportService {
         return reportRepository.save(requestDto.toEntity(padBox.get())).getId();
     }
 
+    @Transactional(readOnly = true)
     public ReportResponseDto findById(Long id) {
         Report entity = reportRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 신고가 없습니다. id=" + id));

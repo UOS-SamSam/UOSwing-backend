@@ -6,21 +6,25 @@ import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportTag;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 public class ReportResponseDto {
 
     private Long id;
-    private PadBox padBox;
+    private PadBoxResponseDto padBox;
     private ReportTag tag;
     private String content;
     private Boolean isResolved;
+    private LocalDateTime createdDate;
 
     public ReportResponseDto(Report entity) {
         this.id = entity.getId();
-        this.padBox = entity.getPadBox();
+        this.padBox = new PadBoxResponseDto(entity.getPadBox());
         this.tag = entity.getTag();
         this.content = entity.getContent();
         this.isResolved = entity.getIsResolved();
+        this.createdDate = entity.getCreatedDate();
     }
 }
