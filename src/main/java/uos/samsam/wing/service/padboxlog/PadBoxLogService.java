@@ -19,6 +19,9 @@ public class PadBoxLogService {
 
     @Transactional
     public List<StatisticsResponseDto> statistics(Integer duration) {
+        if (duration <= 0) {
+            throw new IllegalArgumentException("0 또는 음수의 기간을 입력했습니다.");
+        }
         LocalDateTime deleteLimit = LocalDateTime.now().minusDays(365);
         LocalDateTime begin = LocalDateTime.now().minusDays(duration);
         Map<PadBox, Integer> counter = new HashMap<>();

@@ -1,15 +1,22 @@
 package uos.samsam.wing.web.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@ApiModel(value = "PadBoxUpdateStateRequest(생리대함 상태 갱신 정보, 아두이노 전용)", description = "생리대함 상태 갱신에 대한 요청입니다. 아두이노 전용입니다.")
 @Getter
 @NoArgsConstructor
 public class PadBoxUpdateStateRequestDto {
-    private Integer padAmount;      // 남은 수량
-    private Double temperature; // 온도
-    private Double humidity;    // 습도
+
+    @ApiModelProperty(value = "남은 생리대 수량")
+    private Integer padAmount;
+    @ApiModelProperty(value = "현재 온도")
+    private Double temperature;
+    @ApiModelProperty(value = "현재 습도")
+    private Double humidity;
 
     @Builder
     public PadBoxUpdateStateRequestDto(Integer padAmount, Double temperature, Double humidity) {

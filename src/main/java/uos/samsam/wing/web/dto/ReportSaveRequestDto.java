@@ -1,5 +1,7 @@
 package uos.samsam.wing.web.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,13 +11,18 @@ import uos.samsam.wing.domain.report.ReportTag;
 
 import java.util.Optional;
 
+@ApiModel(value = "ReportSaveRequest(신고 저장 정보)", description = "신고 저장에 대한 요청입니다.")
 @Getter
 @NoArgsConstructor
 public class ReportSaveRequestDto {
 
+    @ApiModelProperty(value = "신고 생리대함 id")
     private Long padBoxId;
+    @ApiModelProperty(value = "신고 분류")
     private ReportTag tag;
+    @ApiModelProperty(value = "신고 내용")
     private String content;
+    @ApiModelProperty(value = "해결 여부")
     private Boolean isResolved;
 
     @Builder
