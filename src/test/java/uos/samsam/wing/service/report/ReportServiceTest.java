@@ -61,7 +61,7 @@ class ReportServiceTest {
 
         //then
         ReportResponseDto responseDto = reportService.findById(reportId);
-        assertThat(responseDto.getPadBox().getId()).isEqualTo(savedPadBoxId);
+        assertThat(responseDto.getPadBoxId()).isEqualTo(savedPadBoxId);
         assertThat(responseDto.getTag()).isEqualTo(tag);
         assertThat(responseDto.getContent()).isEqualTo(content);
         assertThat(responseDto.getIsResolved()).isEqualTo(isResolved);
