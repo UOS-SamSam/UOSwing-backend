@@ -8,6 +8,10 @@ import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.padbox.PadBoxRepository;
 import uos.samsam.wing.domain.padboxlog.PadBoxLog;
 import uos.samsam.wing.domain.padboxlog.PadBoxLogRepository;
+import uos.samsam.wing.domain.report.Report;
+import uos.samsam.wing.domain.report.ReportRepository;
+import uos.samsam.wing.domain.report.ReportTag;
+import uos.samsam.wing.service.report.ReportService;
 import uos.samsam.wing.web.dto.*;
 
 import java.time.LocalDateTime;
@@ -23,9 +27,12 @@ class PadBoxServiceTest {
     @Autowired PadBoxRepository padBoxRepository;
     @Autowired PadBoxService padBoxService;
     @Autowired PadBoxLogRepository padBoxLogRepository;
+    @Autowired ReportRepository reportRepository;
+    @Autowired ReportService reportService;
 
     @AfterEach
     void cleanup() {
+        reportRepository.deleteAll();
         padBoxLogRepository.deleteAll();
         padBoxRepository.deleteAll();
     }
@@ -279,5 +286,65 @@ class PadBoxServiceTest {
         assertTrue(names.contains(responseDtoList.get(1).getName()));
         assertThat(responseDtoList.get(0).getIsReported()).isFalse();
         assertThat(responseDtoList.get(1).getIsReported()).isFalse();
+    }
+
+    @Test
+    void PadBox_외래키와_같이_삭제_테스트() {
+        // given
+        Double latitude = 37.583458;
+        Double longitude = 127.058305;
+        String address = "서울특별시 동대문구 전농2동 89-14";
+        String name = "21세기관";
+        Integer padAmount = 10;
+        Double temperature = 21.0;
+        Double humidity = 35.0;
+        PadBoxSaveRequestDto saveRequestDto = PadBoxSaveRequestDto.builder()
+                .latitude(latitude)
+                .longitude(longitude)
+                .address(address)
+                .name(name)
+                .padAmount(padAmount)
+                .temperature(temperature)
+                .humidity(humidity)
+                .build();
+        Long id = padBoxService.save(saveRequestDto);
+
+        ReportTag tag = ReportTag.BROKEN;
+        String content = "테스트 내용";
+        Boolean isResolved = false;
+        ReportSaveRequestDto requestDto = ReportSaveRequestDto.builder()
+                .padBoxId(id)
+                .tag(tag)
+                .content(content)
+                .isResolved(isResolved)
+                .build();
+        Long reportId = reportService.save(requestDto);
+
+        Integer nextPadAmount = 0;
+        Double nextTemperature = 23.0;
+        Double nextHumidity = 34.0;
+        PadBoxUpdateStateRequestDto updateRequestDto = PadBoxUpdateStateRequestDto.builder()
+                .padAmount(nextPadAmount)
+                .temperature(nextTemperature)
+                .humidity(nextHumidity)
+                .build();
+        padBoxService.updateState(id, updateRequestDto);
+
+        // before check
+        List<PadBoxLog> padBoxLogs = padBoxLogRepository.findAll();
+        List<Report> reports = reportRepository.findAll();
+        assertThat(padBoxLogs.size()).isGreaterThan(0);
+        assertThat(reports.size()).isGreaterThan(0);
+
+        //when
+        padBoxService.delete(id);
+
+        //then
+        List<PadBoxListResponseDto> responseDtoList = padBoxService.findAll();
+        assertThat(responseDtoList.size()).isEqualTo(0);
+        padBoxLogs = padBoxLogRepository.findAll();
+        reports = reportRepository.findAll();
+        assertThat(padBoxLogs.size()).isEqualTo(0);
+        assertThat(reports.size()).isEqualTo(0);
     }
 }

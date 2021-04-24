@@ -45,7 +45,6 @@ public class PadBoxService {
             padBoxLogRepository.save(PadBoxLog.builder()
                     .padBox(padBox)
                     .usedAmount(diff)
-                    .updatedDate(LocalDateTime.now())
                     .build());
         }
         return id;
@@ -55,6 +54,12 @@ public class PadBoxService {
     public void delete(Long id) {
         PadBox padBox = padBoxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("[id:" + id + "]해당 보관함이 없습니다."));
+        List<PadBoxLog> padBoxLogs = padBoxLogRepository.findAll();
+        for (PadBoxLog padBoxLog : padBoxLogs) {
+            if (padBoxLog.getPadBox().equals(padBox)) {
+                padBoxLogRepository.delete(padBoxLog);
+            }
+        }
         padBoxRepository.delete(padBox);
     }
 

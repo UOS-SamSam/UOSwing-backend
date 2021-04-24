@@ -43,7 +43,7 @@ public class PadBox {
     private LocalDateTime updatedStateDate;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "padBox", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "padBox", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Report> reportList = new ArrayList<>();
 
     @Builder
