@@ -52,7 +52,7 @@ class PadBoxLogRepositoryTest {
         Integer usedAmount = 3;
         padBoxLogRepository.save(PadBoxLog.builder()
                 .padBox(padBox)
-                .usedAmount(usedAmount)
+                .diffAmount(usedAmount)
                 .build());
 
         // when
@@ -60,7 +60,7 @@ class PadBoxLogRepositoryTest {
 
         // then
         PadBoxLog padBoxLog = padBoxLogList.get(0);
-        assertThat(padBoxLog.getUsedAmount()).isEqualTo(usedAmount);
+        assertThat(padBoxLog.getDiffAmount()).isEqualTo(usedAmount);
         assertThat(padBoxLog.getCreatedDate()).isAfter(now);
         assertThat(padBox.getId()).isEqualTo(padBoxLog.getPadBox().getId());
         assertThat(padBox.getName()).isEqualTo(padBoxLog.getPadBox().getName());

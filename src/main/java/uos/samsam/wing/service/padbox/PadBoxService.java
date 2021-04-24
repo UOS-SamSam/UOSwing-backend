@@ -44,7 +44,7 @@ public class PadBoxService {
         if (diff != 0) {
             padBoxLogRepository.save(PadBoxLog.builder()
                     .padBox(padBox)
-                    .usedAmount(diff)
+                    .diffAmount(diff)
                     .build());
         }
         return id;

@@ -167,7 +167,7 @@ class PadBoxServiceTest {
 
         List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
         PadBoxLog padBoxLog = padBoxLogList.get(0);
-        assertThat(padBoxLog.getUsedAmount()).isEqualTo(-10);
+        assertThat(padBoxLog.getDiffAmount()).isEqualTo(-10);
         assertThat(padBoxLog.getPadBox().getId()).isEqualTo(id);
         assertThat(padBoxLog.getCreatedDate()).isAfter(now);
     }

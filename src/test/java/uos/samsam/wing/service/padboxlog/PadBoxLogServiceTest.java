@@ -50,10 +50,10 @@ class PadBoxLogServiceTest {
                 .humidity(humidity)
                 .build());
 
-        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox.getId() +", -3)";
-        String sql2 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -8, NOW()), "+ padBox.getId() +", -5)";
-        String sql3 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -1, NOW()), "+ padBox.getId() +", -3)";
-        String sql4 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -10, NOW()), "+ padBox.getId() +", -5)";
+        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox.getId() +", -3)";
+        String sql2 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -8, NOW()), "+ padBox.getId() +", -5)";
+        String sql3 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -1, NOW()), "+ padBox.getId() +", -3)";
+        String sql4 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -10, NOW()), "+ padBox.getId() +", -5)";
         jdbcTemplate.execute(sql1);
         jdbcTemplate.execute(sql2);
         jdbcTemplate.execute(sql3);
@@ -83,10 +83,10 @@ class PadBoxLogServiceTest {
                 .humidity(humidity)
                 .build());
 
-        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -25, NOW()), "+ padBox.getId() +", -5)";
-        String sql2 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -41, NOW()), "+ padBox.getId() +", -3)";
-        String sql3 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox.getId() +", -5)";
-        String sql4 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -99, NOW()), "+ padBox.getId() +", -3)";
+        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -25, NOW()), "+ padBox.getId() +", -5)";
+        String sql2 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -41, NOW()), "+ padBox.getId() +", -3)";
+        String sql3 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox.getId() +", -5)";
+        String sql4 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -99, NOW()), "+ padBox.getId() +", -3)";
         jdbcTemplate.execute(sql1);
         jdbcTemplate.execute(sql2);
         jdbcTemplate.execute(sql3);
@@ -110,11 +110,11 @@ class PadBoxLogServiceTest {
                 .humidity(35.0)
                 .build());
 
-        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -2, NOW()), "+ padBox1.getId() +", 5)";
-        String sql2 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox1.getId() +", 3)";
-        String sql3 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox1.getId() +", -4)";
-        String sql4 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox1.getId() +", -9)";
-        String sql5 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox1.getId() +", 0)";
+        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -2, NOW()), "+ padBox1.getId() +", 5)";
+        String sql2 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox1.getId() +", 3)";
+        String sql3 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox1.getId() +", -4)";
+        String sql4 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox1.getId() +", -9)";
+        String sql5 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox1.getId() +", 0)";
         jdbcTemplate.execute(sql1);
         jdbcTemplate.execute(sql2);
         jdbcTemplate.execute(sql3);
@@ -132,11 +132,11 @@ class PadBoxLogServiceTest {
                 .humidity(35.0)
                 .build());
 
-        String sql6 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -2, NOW()), "+ padBox2.getId() +", 10)";
-        String sql7 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox2.getId() +", 15)";
-        String sql8 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox2.getId() +", -100)";
-        String sql9 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox2.getId() +", -150)";
-        String sql10 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox2.getId() +", 0)";
+        String sql6 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -2, NOW()), "+ padBox2.getId() +", 10)";
+        String sql7 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox2.getId() +", 15)";
+        String sql8 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -4, NOW()), "+ padBox2.getId() +", -100)";
+        String sql9 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox2.getId() +", -150)";
+        String sql10 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox2.getId() +", 0)";
         jdbcTemplate.execute(sql6);
         jdbcTemplate.execute(sql7);
         jdbcTemplate.execute(sql8);
@@ -169,7 +169,7 @@ class PadBoxLogServiceTest {
                 .humidity(humidity)
                 .build());
 
-        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -369, NOW()), "+ padBox.getId() +", -5)";
+        String sql1 = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -369, NOW()), "+ padBox.getId() +", -5)";
         jdbcTemplate.execute(sql1);
 
         List<StatisticsResponseDto> responseDtoList = padBoxLogService.statistics(30);
