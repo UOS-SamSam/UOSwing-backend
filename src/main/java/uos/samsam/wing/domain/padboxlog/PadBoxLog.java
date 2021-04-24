@@ -7,7 +7,6 @@ import uos.samsam.wing.domain.BaseTimeEntity;
 import uos.samsam.wing.domain.padbox.PadBox;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -22,11 +21,11 @@ public class PadBoxLog extends BaseTimeEntity {
     @JoinColumn(name = "BOX_ID")
     private PadBox padBox;          // 사용된 PadBox
 
-    private Integer usedAmount;         // 사용 갯수
+    private Integer diffAmount;     // 변화량
 
     @Builder
-    public PadBoxLog(PadBox padBox, Integer usedAmount, LocalDateTime updatedDate) {
+    public PadBoxLog(PadBox padBox, Integer diffAmount) {
         this.padBox = padBox;
-        this.usedAmount = usedAmount;
+        this.diffAmount = diffAmount;
     }
 }

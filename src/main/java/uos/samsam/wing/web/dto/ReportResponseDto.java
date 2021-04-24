@@ -18,7 +18,7 @@ public class ReportResponseDto {
     @ApiModelProperty(value = "신고 id")
     private Long id;
     @ApiModelProperty(value = "신고된 생리대함 조회 정보")
-    private PadBoxResponseDto padBox;
+    private Long padBoxId;
     @ApiModelProperty(value = "신고 분류")
     private ReportTag tag;
     @ApiModelProperty(value = "신고 내용")
@@ -30,7 +30,7 @@ public class ReportResponseDto {
 
     public ReportResponseDto(Report entity) {
         this.id = entity.getId();
-        this.padBox = new PadBoxResponseDto(entity.getPadBox());
+        this.padBoxId = entity.getPadBox().getId();
         this.tag = entity.getTag();
         this.content = entity.getContent();
         this.isResolved = entity.getIsResolved();

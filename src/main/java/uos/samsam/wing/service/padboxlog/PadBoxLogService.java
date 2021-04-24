@@ -30,10 +30,10 @@ public class PadBoxLogService {
         for (PadBoxLog padBoxLog : padBoxLogList) {
             if (padBoxLog.getCreatedDate().isBefore(deleteLimit)) {
                 padBoxLogRepository.delete(padBoxLog);
-            } else if (padBoxLog.getCreatedDate().isAfter(begin) && padBoxLog.getUsedAmount() < 0) {
+            } else if (padBoxLog.getCreatedDate().isAfter(begin) && padBoxLog.getDiffAmount() < 0) {
                 PadBox padBox = padBoxLog.getPadBox();
                 Integer beforeValue = counter.get(padBox);
-                counter.put(padBox, beforeValue == null ? -padBoxLog.getUsedAmount() : beforeValue + -padBoxLog.getUsedAmount());
+                counter.put(padBox, beforeValue == null ? -padBoxLog.getDiffAmount() : beforeValue + -padBoxLog.getDiffAmount());
             }
         }
 

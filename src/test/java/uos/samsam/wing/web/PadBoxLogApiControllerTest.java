@@ -71,7 +71,7 @@ class PadBoxLogApiControllerTest {
                 .humidity(humidity)
                 .build());
 
-        String sql = "INSERT INTO PAD_BOX_LOG (created_date, box_id, used_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox.getId() +", -3)";
+        String sql = "INSERT INTO PAD_BOX_LOG (created_date, box_id, diff_amount) values (DATEADD('DAY', -3, NOW()), "+ padBox.getId() +", -3)";
         jdbcTemplate.execute(sql);
 
         String url = preUrl + "30";
