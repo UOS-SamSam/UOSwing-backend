@@ -55,6 +55,7 @@ public class PadBox {
         this.padAmount = padAmount;
         this.temperature = temperature;
         this.humidity = humidity;
+        this.updatedStateDate = LocalDateTime.now();
     }
 
     public void update(Double latitude, Double longitude, String address, String name) {
@@ -62,7 +63,6 @@ public class PadBox {
         this.longitude = longitude;
         this.address = address;
         this.name = name;
-        this.updatedStateDate = LocalDateTime.now();
     }
 
     public Integer updateState(Integer padAmount, Double temperature, Double humidity) {
