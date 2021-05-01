@@ -137,5 +137,8 @@ class ReportServiceTest {
         //then
         List<ReportResponseDto> reportList = reportService.findAll();
         assertThat(reportList.size()).isEqualTo(0);
+
+        List<PadBox> padBoxes = padBoxRepository.findAll();
+        assertThat(padBoxes.size()).isGreaterThan(0);
     }
 }

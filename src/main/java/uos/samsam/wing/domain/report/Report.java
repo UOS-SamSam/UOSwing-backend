@@ -19,7 +19,7 @@ public class Report extends BaseTimeEntity {
     private Long id;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="BOX_ID")
     private PadBox padBox;
 
