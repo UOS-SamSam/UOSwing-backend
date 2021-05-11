@@ -174,7 +174,7 @@ class PadBoxLogServiceTest {
 
         List<StatisticsResponseDto> responseDtoList = padBoxLogService.statistics(30);
         List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
-        assertThat(responseDtoList.size()).isEqualTo(0);
+        assertThat(responseDtoList.get(0).getAmount()).isEqualTo(0);
         assertThat(padBoxLogList.size()).isEqualTo(0);
     }
 }

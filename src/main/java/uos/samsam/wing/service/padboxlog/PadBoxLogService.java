@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uos.samsam.wing.domain.padbox.PadBox;
+import uos.samsam.wing.domain.padbox.PadBoxRepository;
 import uos.samsam.wing.domain.padboxlog.PadBoxLog;
 import uos.samsam.wing.domain.padboxlog.PadBoxLogRepository;
 import uos.samsam.wing.web.dto.StatisticsResponseDto;
@@ -16,6 +17,7 @@ import java.util.*;
 public class PadBoxLogService {
 
     private final PadBoxLogRepository padBoxLogRepository;
+    private final PadBoxRepository padBoxRepository;
 
     @Transactional
     public List<StatisticsResponseDto> statistics(Integer duration) {
@@ -27,13 +29,19 @@ public class PadBoxLogService {
         Map<PadBox, Integer> counter = new HashMap<>();
 
         List<PadBoxLog> padBoxLogList = padBoxLogRepository.findAll();
+        List<PadBox> padBoxList = padBoxRepository.findAll();
+
+        for (PadBox padBox : padBoxList) {
+            counter.put(padBox, 0);
+        }
+
         for (PadBoxLog padBoxLog : padBoxLogList) {
             if (padBoxLog.getCreatedDate().isBefore(deleteLimit)) {
                 padBoxLogRepository.delete(padBoxLog);
             } else if (padBoxLog.getCreatedDate().isAfter(begin) && padBoxLog.getDiffAmount() < 0) {
                 PadBox padBox = padBoxLog.getPadBox();
                 Integer beforeValue = counter.get(padBox);
-                counter.put(padBox, beforeValue == null ? -padBoxLog.getDiffAmount() : beforeValue + -padBoxLog.getDiffAmount());
+                counter.put(padBox, beforeValue + -padBoxLog.getDiffAmount());
             }
         }
 
