@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,10 +23,12 @@ import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
+@PropertySource("classpath:secretKey.properties")
 @Component
 public class JwtTokenProvider {
 
-    private String secretKey = "THIS_IS_SECRET_KEY";
+    @Value("${secretKey}")
+    private String secretKey;
 
     // 토큰 유효시간 30분
     private Long tokenValidTime = 30 * 60 * 1000L;
