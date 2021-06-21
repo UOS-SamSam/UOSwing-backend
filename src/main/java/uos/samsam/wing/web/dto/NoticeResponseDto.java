@@ -9,6 +9,10 @@ import uos.samsam.wing.domain.notice.Notice;
 
 import java.time.LocalDateTime;
 
+/**
+ * NoticeResponseDto
+ * 공지 엔티티를 나타내는 DTO입니다.
+ */
 @ApiModel(value = "NoticeResponse(공지 조회 정보)", description = "공지 조회에 대한 응답입니다.")
 @Getter
 @NoArgsConstructor

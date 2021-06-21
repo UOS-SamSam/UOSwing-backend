@@ -13,6 +13,10 @@ import uos.samsam.wing.web.dto.NoticeUpdateRequestDto;
 
 import java.util.List;
 
+/**
+ * NoticeApiController
+ * 공지 api가 정의되는 컨트롤러 클래스입니다.
+ */
 @Api(value = "NoticeApiController v1")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/notice")

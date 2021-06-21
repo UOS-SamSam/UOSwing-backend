@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * ReportUpdateRequestDto
+ * 신고 수정 api로 전달되는 http request DTO입니다.
+ */
 @ApiModel(value = "ReportUpdateRequest(신고 수정 정보)", description = "신고 수정에 대한 요청입니다.")
 @Getter
 @NoArgsConstructor

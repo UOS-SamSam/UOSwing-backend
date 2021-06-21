@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import uos.samsam.wing.domain.notice.Notice;
 
+/**
+ * NoticeSaveRequestDto
+ * 공지 저장 api로 전달되는 http request DTO입니다.
+ */
 @ApiModel(value = "NoticeSaveRequest(공지 저장 정보)", description = "공지 저장에 대한 요청입니다.")
 @Getter
 @NoArgsConstructor

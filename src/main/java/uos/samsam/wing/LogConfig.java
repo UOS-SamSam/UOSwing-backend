@@ -14,27 +14,33 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * LogConfig
+ * 서버의 로그를 설정하는 클래스입니다.
+ */
 @Slf4j
 @Aspect
 @Component
 public class LogConfig {
-
+    
     @Around("within(uos.samsam.wing.web..*)")
     public Object logging(ProceedingJoinPoint pjp) throws Throwable {
 
         String params = getRequestParams();
 
-        long startAt = System.currentTimeMillis();
+        long startAt = System.currentTimeMillis();  //request 처리 시작 시간
 
+        //로그 출력
         log.info("===================> REQUEST: {}({}) = {}",
                 pjp.getSignature().getDeclaringTypeName(),
                 pjp.getSignature().getName(),
                 params);
 
-        Object result = pjp.proceed();
+        Object result = pjp.proceed();  //request 처리
 
-        long endAt = System.currentTimeMillis();
+        long endAt = System.currentTimeMillis();    //request 처리 마친 시간
 
+        //로그 출력
         log.info("===================> RESPONSE: {}({}) = {} ({}ms)",
                 pjp.getSignature().getDeclaringTypeName(),
                 pjp.getSignature().getName(),
@@ -44,7 +50,10 @@ public class LogConfig {
         return result;
     }
 
-    // Request value를 갖고온다.
+    /**
+     * http request에서 parameter을 추출합니다.
+     * @return parameter의 목록을 나타내는 문자열
+     */
     private String getRequestParams() {
         String params = "None";
 
@@ -63,6 +72,11 @@ public class LogConfig {
         return params;
     }
 
+    /**
+     * http request parameter를 String으로 변환합니다.
+     * @param paramMap parameter 정보가 저장된 Map
+     * @return 변환 완료된 문자열
+     */
     private String paramMapToString(Map<String, String[]> paramMap) {
         return paramMap.entrySet().stream()
                 .map(entry -> String.format("%s -> (%s)", entry.getKey(), Joiner.on(",").join(entry.getValue())))

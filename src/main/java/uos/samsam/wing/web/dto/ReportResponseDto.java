@@ -10,6 +10,10 @@ import uos.samsam.wing.domain.report.ReportTag;
 
 import java.time.LocalDateTime;
 
+/**
+ * ReportResponseDto
+ * 신고 엔티티를 나타내는 DTO입니다.
+ */
 @ApiModel(value = "ReportResponse(신고 조회 정보)", description = "신고 조회에 대한 응답입니다.")
 @Getter
 @NoArgsConstructor

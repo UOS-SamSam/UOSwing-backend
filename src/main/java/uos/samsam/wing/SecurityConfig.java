@@ -15,6 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import uos.samsam.wing.auth.JwtAuthenticationFilter;
 import uos.samsam.wing.auth.JwtTokenProvider;
 
+/**
+ * SecurityConfig
+ * Spring Security 관련 설정 클래스입니다.
+ * WebSecurityConfigurerAdapter을 상속받습니다.
+ */
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
@@ -22,6 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+    /**
+     * password encoder를 설정합니다.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -33,6 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * Spring Security 보안 설정을 위한 메소드입니다.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
@@ -60,17 +71,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
     }
-/*
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(
-                "/h2-console/**",
-                "/v2/api-docs",
-                "/configuration/ui",
-                "/swagger-resources/**",
-                "/configuration/security",
-                "/swagger-ui.html",
-                "/webjars/**",
-                "/swagger/**");
-    }*/
 }
