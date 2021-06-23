@@ -12,6 +12,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * PadBox
+ * 생리대함을 나타내는 도메인 클래스입니다.
+ * DB에 접근할 때 사용하는 클래스입니다.
+ */
 @Getter
 @NoArgsConstructor
 @Entity
@@ -58,6 +63,7 @@ public class PadBox {
         this.updatedStateDate = LocalDateTime.now();
     }
 
+    // 위도, 경도, 주소, 이름 갱신
     public void update(Double latitude, Double longitude, String address, String name) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -65,6 +71,7 @@ public class PadBox {
         this.name = name;
     }
 
+    // 생리대 수량, 온도, 습도 갱신
     public Integer updateState(Integer padAmount, Double temperature, Double humidity) {
         Integer diff = padAmount - this.padAmount;
         this.padAmount = padAmount;

@@ -14,6 +14,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * PadBoxLogRepositoryTest
+ * PadBoxLogRepository를 테스트하기 위한 클래스입니다.
+ * 각종 테스트 메소드가 정의되어 있습니다.
+ */
 @SpringBootTest
 class PadBoxLogRepositoryTest {
 
@@ -47,7 +52,6 @@ class PadBoxLogRepositoryTest {
                 .build();
         padBoxRepository.save(padBox);
 
-//        LocalDateTime now = LocalDateTime.now();
         LocalDateTime now = LocalDateTime.of(2021, 3, 27, 0, 0, 0);
         Integer usedAmount = 3;
         padBoxLogRepository.save(PadBoxLog.builder()

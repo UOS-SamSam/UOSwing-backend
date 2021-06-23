@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import uos.samsam.wing.domain.padbox.PadBox;
 
+/**
+ * PadBoxResponseDto
+ * 생리대함 조회 api의 응답 DTO입니다.
+ */
 @ApiModel(value = "PadBoxResponse(생리대함 조회 정보)", description = "생리대함 조회에 대한 응답입니다.")
 @Getter
 @NoArgsConstructor

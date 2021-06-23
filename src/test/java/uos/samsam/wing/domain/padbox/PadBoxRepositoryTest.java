@@ -14,6 +14,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * PadBoxRepositoryTest
+ * PadBoxRepository를 테스트하기 위한 클래스입니다.
+ * 각종 테스트 메소드가 정의되어 있습니다.
+ */
 @SpringBootTest
 class PadBoxRepositoryTest {
 

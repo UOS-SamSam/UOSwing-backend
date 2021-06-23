@@ -22,6 +22,11 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * PadBoxLogApiControllerTest
+ * PadBoxLogApiController를 테스트하기 위한 클래스입니다.
+ * 각종 테스트 메소드가 정의되어 있습니다.
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PadBoxLogApiControllerTest {

@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * PadBoxUpdateStateRequestDto
+ * 생리대함 상태 갱신 api로 전달되는 http request DTO입니다.
+ */
 @ApiModel(value = "PadBoxUpdateStateRequest(생리대함 상태 갱신 정보, 아두이노 전용)", description = "생리대함 상태 갱신에 대한 요청입니다. 아두이노 전용입니다.")
 @Getter
 @NoArgsConstructor

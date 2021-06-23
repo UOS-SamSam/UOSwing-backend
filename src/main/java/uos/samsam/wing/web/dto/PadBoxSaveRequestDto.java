@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import uos.samsam.wing.domain.padbox.PadBox;
 
+/**
+ * PadBoxSaveRequestDto
+ * 생리대함 저장 api로 전달되는 http request DTO입니다.
+ */
 @ApiModel(value = "PadBoxSaveRequest(생리대함 저장 정보)", description = "생리대함 저장에 대한 요청입니다.")
 @Getter
 @NoArgsConstructor

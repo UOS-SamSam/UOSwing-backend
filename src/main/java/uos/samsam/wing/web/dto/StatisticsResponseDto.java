@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * StatisticsResponseDto
+ * 통계 조회 api의 응답 DTO입니다.
+ */
 @ApiModel(value = "StatisticsResponse(통계 조회 정보)", description = "통계 조회에 대한 응답입니다.")
 @Getter
 @NoArgsConstructor
