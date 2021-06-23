@@ -8,6 +8,13 @@ import uos.samsam.wing.domain.padbox.PadBox;
 
 import javax.persistence.*;
 
+/**
+ * PadBoxLog
+ * 생리대함 로그를 나타내는 도메인 클래스입니다.
+ * DB에 접근할 때 사용하는 클래스입니다.
+ *
+ * BastTimeEntity를 상속받습니다.
+ */
 @Getter
 @NoArgsConstructor
 @Entity

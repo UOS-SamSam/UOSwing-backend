@@ -13,6 +13,10 @@ import uos.samsam.wing.web.dto.ReportUpdateRequestDto;
 
 import java.util.List;
 
+/**
+ * ReportApiController
+ * 신고 api가 정의되는 컨트롤러 클래스입니다.
+ */
 @Api(value = "ReportApiController v1")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/report")

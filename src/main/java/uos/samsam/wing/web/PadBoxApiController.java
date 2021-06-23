@@ -11,6 +11,10 @@ import uos.samsam.wing.web.dto.*;
 
 import java.util.List;
 
+/**
+ * PadBoxApiController
+ * 생리대함 api가 정의되는 컨트롤러 클래스입니다.
+ */
 @Api(value = "PadBoxApiController v1")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/padbox")

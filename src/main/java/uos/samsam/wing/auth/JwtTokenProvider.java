@@ -22,6 +22,11 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * JwtTokenProvider
+ * JWT토큰의 생성, 검증을 담당하는 클래스입니다.
+ */
+
 @RequiredArgsConstructor
 @PropertySource("classpath:secretKey.properties")
 @Component
@@ -30,7 +35,7 @@ public class JwtTokenProvider {
     @Value("${secretKey}")
     private String secretKey;
 
-    // 토큰 유효시간 30분
+    //토큰 유효시간 30분
     private Long tokenValidTime = 30 * 60 * 1000L;
 
     private final UserDetailsService userDetailsService;
@@ -40,7 +45,7 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    //jwt 토큰 생성
+    //JWT토큰을 생성한다.
     public String createToken(String userPk, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(userPk);
         claims.put("roles", roles);
@@ -54,7 +59,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    //인증 정보 조회 from jwt 토큰
+    //JWT토큰에서 인증 정보를 추출한다.
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
@@ -66,12 +71,12 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token).getBody().getSubject();
     }
 
-    //Request의 header에서 token 값 가져오기
+    //http request의 header에서 token을 추출한다.
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("X-AUTH-TOKEN");
     }
 
-    //토큰의 유효성 + 만료일자 확인
+    //토큰의 유효성 및 만료일시를 확인한다.
     public Boolean validateToken(String jwtToken) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);

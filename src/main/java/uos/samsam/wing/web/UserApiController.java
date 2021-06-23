@@ -13,6 +13,10 @@ import uos.samsam.wing.service.user.UserService;
 import uos.samsam.wing.web.dto.UserLoginRequestDto;
 import uos.samsam.wing.web.dto.UserSaveRequestDto;
 
+/**
+ * UserApiController
+ * 유저 api가 정의되는 컨트롤러 클래스입니다.
+ */
 @Api(value = "UserApiController v1")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/admin")
@@ -32,6 +36,7 @@ public class UserApiController {
         return userService.login(requestDto);
     }
 
+    @Deprecated
     @ApiOperation(value = "회원가입(테스트용)", notes = "새로운 관리자 계정을 생성합니다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "회원 생성 성공"),

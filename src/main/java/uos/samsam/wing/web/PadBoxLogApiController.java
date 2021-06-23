@@ -14,6 +14,10 @@ import uos.samsam.wing.web.dto.StatisticsResponseDto;
 
 import java.util.List;
 
+/**
+ * PadBoxLogApiController
+ * 생리대함 로그 api가 정의되는 컨트롤러 클래스입니다.
+ */
 @Api(value = "PadBoxLogApiController v1")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/statistics")

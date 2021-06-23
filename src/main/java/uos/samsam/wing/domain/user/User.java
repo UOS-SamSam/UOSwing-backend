@@ -13,6 +13,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * User
+ * 유저를 나타내는 도메인 클래스입니다.
+ * DB에 접근할 때 사용하는 클래스입니다.
+ *
+ * UserDetails를 구현합니다.
+ */
 @Getter
 @NoArgsConstructor
 @Entity

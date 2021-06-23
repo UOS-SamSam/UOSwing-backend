@@ -11,6 +11,10 @@ import uos.samsam.wing.domain.report.ReportTag;
 
 import java.util.Optional;
 
+/**
+ * ReportSaveRequestDto
+ * 신고 저장 api로 전달되는 http request DTO입니다.
+ */
 @ApiModel(value = "ReportSaveRequest(신고 저장 정보)", description = "신고 저장에 대한 요청입니다.")
 @Getter
 @NoArgsConstructor
