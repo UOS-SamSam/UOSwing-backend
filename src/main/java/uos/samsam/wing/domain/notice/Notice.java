@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import uos.samsam.wing.domain.BaseTimeEntity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /**
  * Notice

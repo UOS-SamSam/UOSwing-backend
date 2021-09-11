@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportTag;
 
