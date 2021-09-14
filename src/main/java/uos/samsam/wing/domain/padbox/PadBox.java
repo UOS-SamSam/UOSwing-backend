@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import uos.samsam.wing.domain.report.Report;
 
 import javax.persistence.*;
@@ -72,11 +71,19 @@ public class PadBox {
     }
 
     // 생리대 수량, 온도, 습도 갱신
+    @Deprecated
     public Integer updateState(Integer padAmount, Double temperature, Double humidity) {
         Integer diff = padAmount - this.padAmount;
         this.padAmount = padAmount;
         this.temperature = temperature;
         this.humidity = humidity;
+        this.updatedStateDate = LocalDateTime.now();
+        return diff;
+    }
+
+    public Integer updateState(Integer padAmount) {
+        Integer diff = padAmount - this.padAmount;
+        this.padAmount = padAmount;
         this.updatedStateDate = LocalDateTime.now();
         return diff;
     }

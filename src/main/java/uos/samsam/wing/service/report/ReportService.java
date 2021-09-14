@@ -7,7 +7,9 @@ import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.padbox.PadBoxRepository;
 import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportRepository;
-import uos.samsam.wing.web.dto.*;
+import uos.samsam.wing.web.dto.ReportResponseDto;
+import uos.samsam.wing.web.dto.ReportSaveRequestDto;
+import uos.samsam.wing.web.dto.ReportUpdateRequestDto;
 
 import java.util.List;
 import java.util.Optional;

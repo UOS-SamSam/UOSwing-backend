@@ -34,7 +34,7 @@ class NoticeServiceTest {
     }
 
     @Test
-    void 공지_저장_조회() {
+    void 공지_저장_조회() throws Exception {
         //given
         String title = "테스트 제목";
         String content = "테스트 내용";
@@ -46,6 +46,7 @@ class NoticeServiceTest {
         //when
         Long noticeId = noticeService.save(requestDto);
 
+        Thread.sleep(1000);
         //then
         NoticeResponseDto responseDto = noticeService.findById(noticeId);
         assertThat(responseDto.getTitle()).isEqualTo(title);

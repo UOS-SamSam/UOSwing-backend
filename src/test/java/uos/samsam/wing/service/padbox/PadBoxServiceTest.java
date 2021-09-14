@@ -125,7 +125,7 @@ class PadBoxServiceTest {
     }
 
     @Test
-    void PadBox_상태_갱신_테스트() {
+    void PadBox_상태_갱신_테스트() throws Exception {
         // given
         Double latitude = 37.583458;
         Double longitude = 127.058305;
@@ -146,6 +146,8 @@ class PadBoxServiceTest {
         Long id = padBoxService.save(saveRequestDto);
 
         LocalDateTime now = LocalDateTime.now();
+        Thread.sleep(500);  // to fix timing issue
+
         Integer nextPadAmount = 0;
         Double nextTemperature = 23.0;
         Double nextHumidity = 34.0;

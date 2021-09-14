@@ -17,15 +17,25 @@ public class PadBoxUpdateStateRequestDto {
 
     @ApiModelProperty(value = "남은 생리대 수량")
     private Integer padAmount;
+
+    @Deprecated
     @ApiModelProperty(value = "현재 온도")
     private Double temperature;
+
+    @Deprecated
     @ApiModelProperty(value = "현재 습도")
     private Double humidity;
 
+    @Deprecated
     @Builder
     public PadBoxUpdateStateRequestDto(Integer padAmount, Double temperature, Double humidity) {
         this.padAmount = padAmount;
         this.temperature = temperature;
         this.humidity = humidity;
+    }
+
+    @Builder
+    public PadBoxUpdateStateRequestDto(Integer padAmount) {
+        this.padAmount = padAmount;
     }
 }

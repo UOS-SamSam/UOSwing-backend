@@ -38,7 +38,7 @@ class ReportServiceTest {
     }
 
     @Test
-    void 신고_저장_조회() {
+    void 신고_저장_조회() throws Exception {
         //given
         ReportTag tag = ReportTag.BROKEN;
         String content = "테스트 내용";
@@ -64,6 +64,7 @@ class ReportServiceTest {
         //when
         Long reportId = reportService.save(requestDto);
 
+        Thread.sleep(500);
         //then
         ReportResponseDto responseDto = reportService.findById(reportId);
         assertThat(responseDto.getPadBoxId()).isEqualTo(savedPadBoxId);

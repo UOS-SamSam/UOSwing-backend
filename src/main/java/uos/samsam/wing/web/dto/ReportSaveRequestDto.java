@@ -9,8 +9,6 @@ import uos.samsam.wing.domain.padbox.PadBox;
 import uos.samsam.wing.domain.report.Report;
 import uos.samsam.wing.domain.report.ReportTag;
 
-import java.util.Optional;
-
 /**
  * ReportSaveRequestDto
  * 신고 저장 api로 전달되는 http request DTO입니다.

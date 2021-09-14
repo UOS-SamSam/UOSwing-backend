@@ -9,7 +9,6 @@ import uos.samsam.wing.domain.padboxlog.PadBoxLog;
 import uos.samsam.wing.domain.padboxlog.PadBoxLogRepository;
 import uos.samsam.wing.web.dto.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,7 +60,14 @@ public class PadBoxService {
     public Long updateState(Long id, PadBoxUpdateStateRequestDto requestDto) {
         PadBox padBox = padBoxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("[id:" + id + "]해당 보관함이 없습니다."));
-        Integer diff = padBox.updateState(requestDto.getPadAmount(), requestDto.getTemperature(), requestDto.getHumidity());
+
+        Integer diff;
+        if (requestDto.getHumidity() != null && requestDto.getTemperature() != null) {
+            diff = padBox.updateState(requestDto.getPadAmount(), requestDto.getTemperature(), requestDto.getHumidity());
+        } else {
+            diff = padBox.updateState(requestDto.getPadAmount());
+        }
+
         if (diff != 0) {
             padBoxLogRepository.save(PadBoxLog.builder()
                     .padBox(padBox)
