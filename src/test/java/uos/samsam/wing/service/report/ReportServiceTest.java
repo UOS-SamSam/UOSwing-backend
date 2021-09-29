@@ -35,6 +35,7 @@ class ReportServiceTest {
     @AfterEach
     void cleanup() {
         reportRepository.deleteAll();
+        padBoxRepository.deleteAll();
     }
 
     @Test
@@ -47,7 +48,7 @@ class ReportServiceTest {
                 .latitude(3.3)
                 .longitude(3.3)
                 .address("서울")
-                .name("어딘가")
+                .name("어딘가1")
                 .padAmount(999)
                 .temperature(33.3)
                 .humidity(33.3)
@@ -84,7 +85,7 @@ class ReportServiceTest {
                 .latitude(3.3)
                 .longitude(3.3)
                 .address("서울")
-                .name("어딘가")
+                .name("어딘가2")
                 .padAmount(999)
                 .temperature(33.3)
                 .humidity(33.3)
@@ -121,7 +122,7 @@ class ReportServiceTest {
                 .latitude(3.3)
                 .longitude(3.3)
                 .address("서울")
-                .name("어딘가")
+                .name("어딘가3")
                 .padAmount(999)
                 .temperature(33.3)
                 .humidity(33.3)

@@ -1,6 +1,7 @@
 package uos.samsam.wing.service.padbox;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -348,6 +349,8 @@ class PadBoxServiceTest {
 
         //then
         List<PadBoxListResponseDto> responseDtoList = padBoxService.findAll();
+        //tmp
+        responseDtoList.forEach(dto -> System.out.println(dto.getId() + " " + dto.getAddress() + " " + dto.getName()));
         assertThat(responseDtoList.size()).isEqualTo(0);
         padBoxLogs = padBoxLogRepository.findAll();
         reports = reportRepository.findAll();

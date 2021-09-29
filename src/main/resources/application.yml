@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    group:
+      "dev": "dev"
+      "real1": "real1,real-db"
+      "real2": "real2,real-db"

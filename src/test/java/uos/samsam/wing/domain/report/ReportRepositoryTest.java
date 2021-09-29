@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uos.samsam.wing.domain.padbox.PadBox;
+import uos.samsam.wing.domain.padbox.PadBoxRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,16 +23,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class ReportRepositoryTest {
 
-    ReportRepository reportRepository;
-
     @Autowired
-    public ReportRepositoryTest(ReportRepository reportRepository) {
-        this.reportRepository = reportRepository;
-    }
+    ReportRepository reportRepository;
+    @Autowired
+    PadBoxRepository padBoxRepository;
 
     @AfterEach
     void cleanup() {
         reportRepository.deleteAll();
+        padBoxRepository.deleteAll();
     }
 
     @Test

@@ -36,5 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-### SecretKey ###
+### property files ###
 secretKey.properties
+application-real-db.yml
