@@ -30,6 +30,12 @@
 
 <br />
 
+## ERD
+![ERD](https://user-images.githubusercontent.com/44166353/135648408-9655bda5-316e-49c4-a187-7277b59068de.png)
+
+
+<br />
+
 ## 기타 세부 사항
 - 개발 기간: 2021.03. ~
 - 기술스택
