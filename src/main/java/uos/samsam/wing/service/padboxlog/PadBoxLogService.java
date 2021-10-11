@@ -65,12 +65,7 @@ public class PadBoxLogService {
                     .build());
         }
         // 소모량이 큰 순서대로 정렬
-        Collections.sort(responseDtoList, new Comparator<StatisticsResponseDto>() {
-            @Override
-            public int compare(StatisticsResponseDto obj1, StatisticsResponseDto obj2) {
-                return obj2.getAmount().compareTo(obj1.getAmount());
-            }
-        });
+        responseDtoList.sort((obj1, obj2) -> obj2.getAmount().compareTo(obj1.getAmount()));
         return responseDtoList;
     }
 }

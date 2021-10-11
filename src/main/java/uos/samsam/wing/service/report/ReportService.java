@@ -33,8 +33,9 @@ public class ReportService {
      */
     @Transactional
     public Long save(ReportSaveRequestDto requestDto) {
-        Optional<PadBox> padBox = padBoxRepository.findById(requestDto.getPadBoxId());
-        return reportRepository.save(requestDto.toEntity(padBox.get())).getId();
+        PadBox padBox = padBoxRepository.findById(requestDto.getPadBoxId())
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 생리대함 id입니다. id=" + requestDto.getPadBoxId()));
+        return reportRepository.save(requestDto.toEntity(padBox)).getId();
     }
 
     /**
